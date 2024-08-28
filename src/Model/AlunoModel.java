@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import DAO.CentralDeInformacoesDAO;
 import DTO.AlunoDTO;
 
-public class AlunoModel {
+public class AlunoModel extends PessoaModel {
 
 	private CentralDeInformacoesDAO centralDAO = new CentralDeInformacoesDAO();
 
-	private String nome;
 	private String matricula;
-	private String email;
 	private String sexo;
-	private String senha;
 
 	public boolean salvarAluno(AlunoDTO dto) {
 		return centralDAO.adicionarAluno(dto).getAlunoCriado();
@@ -38,14 +35,6 @@ public class AlunoModel {
 		return centralDAO.listarAlunos(dto);
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getMatricula() {
 		return matricula;
 	}
@@ -54,28 +43,12 @@ public class AlunoModel {
 		this.matricula = matricula;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getSexo() {
 		return sexo;
 	}
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 }
