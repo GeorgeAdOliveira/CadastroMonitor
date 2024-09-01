@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import DAO.CentralDeInformacoesDAO;
 import DTO.AlunoDTO;
 
+/*
+ * @author George
+ */
+
 public class AlunoModel extends PessoaModel {
 
 	private CentralDeInformacoesDAO centralDAO = new CentralDeInformacoesDAO();
