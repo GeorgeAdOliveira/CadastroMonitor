@@ -1,9 +1,10 @@
 package DAO;
 
 import DTO.AlunoDTO;
+import DTO.CoordenadorDTO;
 import Model.AlunoModel;
 
-public class CentralDeInformacoesDAO implements SearchAluno {
+public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 
 	private BancoDeDados bd;
 
@@ -81,5 +82,29 @@ public class CentralDeInformacoesDAO implements SearchAluno {
 	public AlunoDTO listarAlunos(AlunoDTO aluno) {
 		aluno.setAlunos(Persistencia.getInstance().recuperar().getAlunos());
 		return aluno;
+	}
+
+	// Adicionar Coordenador
+	public CoordenadorDTO adicionarCoordenador(CoordenadorDTO coordenador) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// Editar o Coordenador
+	public CoordenadorDTO editarCoordenador(CoordenadorDTO coordenador) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// verificar se ja existe um coordenador no banco de dados
+	public CoordenadorDTO coordenadorExiste(CoordenadorDTO coordenador) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// retorna os dados do coordenador
+	public CoordenadorDTO verCoordenador(CoordenadorDTO coordenador) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
