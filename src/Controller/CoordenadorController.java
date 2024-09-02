@@ -9,8 +9,7 @@ public class CoordenadorController implements MetodosCoordenadorController{
 
 	@Override
 	public boolean criarCoordenador(CoordenadorDTO dto) {
-		// TODO Auto-generated method stub
-		return false;
+		return coordenadorModel.salvarCoordenador(dto);
 	}
 
 	@Override

@@ -7,7 +7,17 @@ public class Programa {
 	public static void main(String[] args) {
 		//new TelaCadastroAluno();
 		
-		CoordenadorDTO coordenador = new CoordenadorDTO();
+		CoordenadorDTO coordenadorDto = new CoordenadorDTO();
+		coordenadorDto.setNome("Cleyton");
+		coordenadorDto.setEmail("Cleyton@gmail.com");
+		coordenadorDto.setSenha("1234");
+		
+		CoordenadorController coordenadorControler = new CoordenadorController();
+		if(coordenadorControler.criarCoordenador(coordenadorDto)) {
+			System.out.println("Coordenador adicionado com sucesso!");
+		} else {
+			System.out.println("Coordenador ja existe!");
+		}
 		
 		//Test GitHub OK
 	}

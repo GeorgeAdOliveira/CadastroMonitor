@@ -3,6 +3,7 @@ package DAO;
 import DTO.AlunoDTO;
 import DTO.CoordenadorDTO;
 import Model.AlunoModel;
+import Model.CoordenadorModel;
 
 public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 
@@ -86,8 +87,20 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 
 	// Adicionar Coordenador
 	public CoordenadorDTO adicionarCoordenador(CoordenadorDTO coordenador) {
-		// TODO Auto-generated method stub
-		return null;
+		if(coordenadorExiste(coordenador).getCoordenadorExiste()) {
+			return coordenador;
+		}
+		// criando coordenador
+		CoordenadorModel coordenadorModel = new CoordenadorModel();
+		coordenadorModel.setNome(coordenador.getNome());
+		coordenadorModel.setEmail(coordenador.getEmail());
+		coordenadorModel.setSenha(coordenador.getSenha());
+		//salvado coordenador no banco de dados
+		bd = Persistencia.getInstance().recuperar();
+		bd.setCoordenador(coordenadorModel);
+		Persistencia.getInstance().salvar(bd);
+		coordenador.setCoordenadorCriado(true);
+		return coordenador;
 	}
 
 	// Editar o Coordenador
@@ -98,8 +111,11 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 
 	// verificar se ja existe um coordenador no banco de dados
 	public CoordenadorDTO coordenadorExiste(CoordenadorDTO coordenador) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		if(bd.getCoordenador()!= null) {
+			coordenador.setCoordenadorExiste(true);
+		}
+		return coordenador;
 	}
 
 	// retorna os dados do coordenador
