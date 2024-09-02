@@ -7,7 +7,7 @@ public class CoordenadorController implements MetodosCoordenadorController{
 
 	private CoordenadorModel coordenadorModel = new CoordenadorModel();
 
-	@Override
+	
 	public boolean criarCoordenador(CoordenadorDTO dto) {
 		return coordenadorModel.salvarCoordenador(dto);
 	}
@@ -18,7 +18,6 @@ public class CoordenadorController implements MetodosCoordenadorController{
 		return false;
 	}
 
-	@Override
 	public CoordenadorDTO verCoordenador(CoordenadorDTO dto) {
 		return coordenadorModel.verCoordenador(dto) ;
 	}
@@ -26,6 +25,6 @@ public class CoordenadorController implements MetodosCoordenadorController{
 	@Override
 	public boolean coordenaodorExiste(CoordenadorDTO dto) {
 		// TODO Auto-generated method stub
-		return false;
+		return coordenadorModel.coordenadorExiste(dto);
 	}
 }
