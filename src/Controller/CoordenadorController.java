@@ -12,19 +12,16 @@ public class CoordenadorController implements MetodosCoordenadorController{
 		return coordenadorModel.salvarCoordenador(dto);
 	}
 
-	@Override
+	
 	public boolean editarCoordenador(CoordenadorDTO dto) {
-		// TODO Auto-generated method stub
-		return false;
+		return coordenadorModel.editarCoordenador(dto);
 	}
 
 	public CoordenadorDTO verCoordenador(CoordenadorDTO dto) {
 		return coordenadorModel.verCoordenador(dto) ;
 	}
 
-	@Override
 	public boolean coordenaodorExiste(CoordenadorDTO dto) {
-		// TODO Auto-generated method stub
 		return coordenadorModel.coordenadorExiste(dto);
 	}
 }

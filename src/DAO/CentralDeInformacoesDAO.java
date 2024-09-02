@@ -105,8 +105,13 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 
 	// Editar o Coordenador
 	public CoordenadorDTO editarCoordenador(CoordenadorDTO coordenador) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		bd.getCoordenador().setNome(coordenador.getNome());
+		bd.getCoordenador().setEmail(coordenador.getEmail());
+		bd.getCoordenador().setSenha(coordenador.getSenha());
+		Persistencia.getInstance().salvar(bd);
+		coordenador.setCoordenadorExiste(true);
+		return coordenador;
 	}
 
 	// verificar se ja existe um coordenador no banco de dados

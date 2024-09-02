@@ -1,9 +1,0 @@
-<DAO.BancoDeDados>
-  <coordenador>
-    <nome>Cleyton</nome>
-    <email>Cleyton@gmail.com</email>
-    <senha>1234</senha>
-    <centralDAO/>
-  </coordenador>
-  <alunos/>
-</DAO.BancoDeDados>

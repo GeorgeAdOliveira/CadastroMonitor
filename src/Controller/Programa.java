@@ -19,10 +19,16 @@ public class Programa {
 			System.out.println("Coordenador ja existe!");
 		} else {
 			System.out.println("Não existe coordenador, criando coordenador!");
-			//criando coordenador
+			// criando coordenador
 			if (coordenadorControler.criarCoordenador(coordenadorDto)) {
 				System.out.println("Coordenador adicionado com sucesso!");
 			}
+		}
+
+		coordenadorDto.setNome("Cleyton Souza");
+
+		if (coordenadorControler.editarCoordenador(coordenadorDto)) {
+			System.out.println("Coordenador editado");
 		}
 
 		CoordenadorDTO coordenadorDto2 = new CoordenadorDTO();
