@@ -3,8 +3,8 @@ package DTO;
 public class CoordenadorDTO {
 
 	private String nome;
-	private String matricula;
 	private String email;
+	private String senha;
 	private boolean coordenadorExiste;
 	private boolean coordenadorCriado;
 
@@ -12,10 +12,10 @@ public class CoordenadorDTO {
 
 	}
 
-	public CoordenadorDTO(String nome, String matricula, String email) {
+	public CoordenadorDTO(String nome, String email, String senha) {
 		this.nome = nome;
-		this.matricula = matricula;
 		this.email = email;
+		this.setSenha(senha);
 	}
 
 	public String getNome() {
@@ -24,14 +24,6 @@ public class CoordenadorDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
 	}
 
 	public String getEmail() {
@@ -56,6 +48,14 @@ public class CoordenadorDTO {
 
 	public void setCoordenadorCriado(boolean coordenadorCriado) {
 		this.coordenadorCriado = coordenadorCriado;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
