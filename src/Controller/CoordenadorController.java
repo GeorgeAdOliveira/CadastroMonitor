@@ -20,8 +20,7 @@ public class CoordenadorController implements MetodosCoordenadorController{
 
 	@Override
 	public CoordenadorDTO verCoordenador(CoordenadorDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return coordenadorModel.verCoordenador(dto) ;
 	}
 
 	@Override

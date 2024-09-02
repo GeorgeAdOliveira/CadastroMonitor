@@ -120,7 +120,11 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 
 	// retorna os dados do coordenador
 	public CoordenadorDTO verCoordenador(CoordenadorDTO coordenador) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		CoordenadorModel coordenadorModel = bd.getCoordenador();
+		coordenador.setNome(coordenadorModel.getNome());
+		coordenador.setEmail(coordenadorModel.getEmail());
+		coordenador.setSenha(coordenadorModel.getSenha());
+		return coordenador;
 	}
 }
