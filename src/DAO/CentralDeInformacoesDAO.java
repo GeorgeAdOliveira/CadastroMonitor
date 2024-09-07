@@ -2,10 +2,11 @@ package DAO;
 
 import DTO.AlunoDTO;
 import DTO.CoordenadorDTO;
+import DTO.EditalDeMonitoriaDTO;
 import Model.AlunoModel;
 import Model.CoordenadorModel;
 
-public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
+public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, SearchEditalDeMonitoria {
 
 	private BancoDeDados bd;
 
@@ -131,5 +132,29 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador {
 		coordenador.setEmail(coordenadorModel.getEmail());
 		coordenador.setSenha(coordenadorModel.getSenha());
 		return coordenador;
+	}
+
+	@Override
+	public EditalDeMonitoriaDTO adicionarEdital(EditalDeMonitoriaDTO edital) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EditalDeMonitoriaDTO editarEdital(EditalDeMonitoriaDTO edital) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EditalDeMonitoriaDTO verEdital(EditalDeMonitoriaDTO edital) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EditalDeMonitoriaDTO excluirEdital(EditalDeMonitoriaDTO edital) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
