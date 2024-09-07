@@ -39,7 +39,7 @@ public class TelaCadastroAluno extends TelaPadrao {
 	private JButton btEditar;
 
 	public TelaCadastroAluno() {
-		super();
+		super("");
 
 		adicionarLabel();
 		adicionarBotoes();
