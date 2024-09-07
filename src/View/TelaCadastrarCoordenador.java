@@ -15,6 +15,10 @@ import Controller.CoordenadorController;
 import DTO.CoordenadorDTO;
 
 public class TelaCadastrarCoordenador extends TelaPadraoImagem {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField tfNome;
 	private JTextField tfEmail;
 	private JPasswordField pfSenha;

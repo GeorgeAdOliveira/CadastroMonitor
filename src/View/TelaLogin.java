@@ -17,6 +17,10 @@ import DTO.CoordenadorDTO;
 
 public class TelaLogin extends TelaPadraoImagem {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField tfEmail;
 	private JPasswordField pfSenha;
 

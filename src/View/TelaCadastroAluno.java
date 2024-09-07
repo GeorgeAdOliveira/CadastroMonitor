@@ -24,7 +24,7 @@ import DTO.AlunoDTO;
 import Model.AlunoModel;
 import Model.Sexo;
 
-public class TelaCadastroAluno extends TelaPadrao {
+public class TelaCadastroAluno extends TelaPadraoImagem {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNome;
@@ -33,19 +33,15 @@ public class TelaCadastroAluno extends TelaPadrao {
 	private JPasswordField pfSenha;
 	private JPasswordField pfConfirmarSenha;
 	private JComboBox<Sexo> cbSexo;
-	private JTable tabela;
 	private JButton btCadastrar;
-	private JButton btDeletar;
-	private JButton btEditar;
+
 
 	public TelaCadastroAluno() {
-		super("");
-
+		super("Cadastrar Aluno","Cadastrar Aluno");
 		adicionarLabel();
 		adicionarBotoes();
 		adicionarCombo(null);
 		adicionarTextFields();
-		adicionarTabela();
 		setVisible(true);
 
 	}
@@ -54,19 +50,23 @@ public class TelaCadastroAluno extends TelaPadrao {
 		public void actionPerformed(ActionEvent cliqueCadastrar) {
 			AlunoDTO alunoDto;
 			AlunoController controler = new AlunoController();
-			int pessoaSelecionada = tabela.getSelectedRow();
 			switch (cliqueCadastrar.getActionCommand()) {
+			case "Voltar":
+				new TelaLogin();
+				dispose();
+				break;
 			case "Cadastrar":
 				try {
 					String email = tfEmail.getText();
 					String senha = new String(pfSenha.getPassword());
 					String confirmarSenha = new String(pfConfirmarSenha.getPassword());
+					
 					if (senha.equals(confirmarSenha)) {
 						alunoDto = new AlunoDTO(tfNome.getText(), tfMatricula.getText(), email,
 								cbSexo.getSelectedItem().toString(), senha);
 						if (controler.criarAluno(alunoDto)) {
 							JOptionPane.showMessageDialog(null, "Aluno adicionado!");
-							new TelaCadastroAluno();
+							new TelaLogin();
 							dispose();
 						} else {
 							JOptionPane.showMessageDialog(null,
@@ -75,49 +75,14 @@ public class TelaCadastroAluno extends TelaPadrao {
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas divergentes!");
 					}
+					
 
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 
 				}
 				break;
-			case "Deletar":
-				if (pessoaSelecionada == -1) {
-					JOptionPane.showMessageDialog(null, "Selecione um Aluno!");
-				} else {
-					if (JOptionPane.showConfirmDialog(null, "Deseja deletar", "Pense bem",
-							JOptionPane.YES_NO_OPTION) == 0) {
-						alunoDto = new AlunoDTO();
-						alunoDto.setIndiceLista(pessoaSelecionada);
-						if (controler.apagarAluno(alunoDto)) {
-							new TelaCadastroAluno();
-							dispose();
-							JOptionPane.showMessageDialog(null, "Aluno deletado!");
-						}
-					}
 
-				}
-				break;
-			case "Editar":
-				if (pessoaSelecionada == -1) {
-					JOptionPane.showMessageDialog(null, "Selecione um Aluno para editar!");
-				} else {
-					String email = tfEmail.getText();
-					String senha = new String(pfSenha.getPassword());
-					alunoDto = new AlunoDTO(tfNome.getText(), tfMatricula.getText(), email,
-							cbSexo.getSelectedItem().toString(), senha);
-					alunoDto.setIndiceLista(pessoaSelecionada);
-					if (controler.editarAluno(alunoDto)) {
-						new TelaCadastroAluno();
-						dispose();
-						JOptionPane.showMessageDialog(null, "Aluno editado!");
-					} else {
-						JOptionPane.showMessageDialog(null, "nâo foi possivel editar!");
-   
-					}
-				}
-
-				break;
 			}
 		}
 	}
@@ -180,20 +145,15 @@ public class TelaCadastroAluno extends TelaPadrao {
 		// ouvinte interno
 		OuvinteDosBotoes ouvinte = new OuvinteDosBotoes();
 		btCadastrar = new JButton("Cadastrar");
-		btCadastrar.setBounds(150, 350, 100, 30);
+		btCadastrar.setBounds(300, 350, 100, 30);
 		btCadastrar.addActionListener(ouvinte);
 		btCadastrar.setEnabled(false);
 		add(btCadastrar);
-
-		JButton btDeletar = new JButton("Deletar");
-		btDeletar.setBounds(460, 350, 100, 30);
-		btDeletar.addActionListener(ouvinte);
-		add(btDeletar);
-
-		JButton btEditar = new JButton("Editar");
-		btEditar.setBounds(570, 350, 100, 30);
-		btEditar.addActionListener(ouvinte);
-		add(btEditar);
+		
+		JButton btVoltar = new JButton("Voltar");
+		btVoltar.setBounds(420, 350, 100, 30);
+		btVoltar.addActionListener(ouvinte);
+		add(btVoltar);
 
 	}
 
@@ -201,7 +161,7 @@ public class TelaCadastroAluno extends TelaPadrao {
 
 		Sexo[] sexos = { Sexo.MASCULINO, Sexo.FEMININO, Sexo.OUTRO };
 		cbSexo = new JComboBox<Sexo>(sexos);
-		cbSexo.setBounds(110, 205, 120, 20);
+		cbSexo.setBounds(220, 240, 120, 20);
 		if (sexo != null) {
 			cbSexo.setSelectedItem(sexo);
 		}
@@ -209,65 +169,38 @@ public class TelaCadastroAluno extends TelaPadrao {
 
 	}
 
-	private void adicionarTabela() {
 
-		AlunoDTO alunoDto = new AlunoDTO();
-		AlunoController controler = new AlunoController();
-		ArrayList<AlunoModel> alunos = controler.verAlunos(alunoDto).getAlunos();
-
-		DefaultTableModel modelo = new DefaultTableModel();
-
-		// definir as colunas
-		modelo.addColumn("Alunos cadastrados");
-		modelo.addColumn("Matricula");
-
-		// Lista com os alunos
-		if (alunos != null) {
-			for (AlunoModel aluno : alunos) {
-				Object[] linha = new Object[2];
-				linha[0] = aluno.getNome();
-				linha[1] = aluno.getMatricula();
-				modelo.addRow(linha);
-			}
-		}
-
-		tabela = new JTable(modelo);
-		JScrollPane jsAlunos = new JScrollPane(tabela);
-		jsAlunos.setBounds(385, 70, 350, 260);
-		jsAlunos.createVerticalScrollBar();
-		add(jsAlunos);
-	}
 
 	public void adicionarLabel() {
 		Font font = new Font("Georgia", Font.ITALIC, 15);
 
 		JLabel lbNome = new JLabel("Nome: ");
-		lbNome.setBounds(45, 80, 100, 30);
+		lbNome.setBounds(160, 120, 100, 30);
 		lbNome.setFont(font);
 		add(lbNome);
 
 		JLabel lbMatricula = new JLabel("Matricula: ");
-		lbMatricula.setBounds(45, 120, 100, 30);
+		lbMatricula.setBounds(158, 160, 100, 30);
 		lbMatricula.setFont(font);
 		add(lbMatricula);
 
 		JLabel lbEmail = new JLabel("E-mail: ");
 		lbEmail.setFont(font);
-		lbEmail.setBounds(45, 160, 100, 30);
+		lbEmail.setBounds(158, 200, 100, 30);
 		add(lbEmail);
 
 		JLabel lbSexo = new JLabel("Sexo: ");
-		lbSexo.setBounds(45, 200, 105, 30);
+		lbSexo.setBounds(158, 235, 105, 30);
 		lbSexo.setFont(font);
 		add(lbSexo);
 
 		JLabel lbSenha = new JLabel("Senha: ");
-		lbSenha.setBounds(110, 268, 105, 30);
+		lbSenha.setBounds(260, 268, 105, 30);
 		lbSenha.setFont(font);
 		add(lbSenha);
 
 		JLabel lbConfirmarSenha = new JLabel("Confirmar Senha: ");
-		lbConfirmarSenha.setBounds(220, 268, 200, 30);
+		lbConfirmarSenha.setBounds(390, 268, 200, 30);
 		lbConfirmarSenha.setFont(font);
 		add(lbConfirmarSenha);
 	}
@@ -277,30 +210,30 @@ public class TelaCadastroAluno extends TelaPadrao {
 
 		tfNome = new JTextField();
 		OuvinteDeTecladoDoCampoNome ouvinteNome = new OuvinteDeTecladoDoCampoNome();
-		tfNome.setBounds(100, 80, 270, 25);
+		tfNome.setBounds(220, 120, 270, 25);
 		tfNome.addFocusListener(ouvinte);
 		tfNome.addKeyListener(ouvinteNome);
 		add(tfNome);
 
 		tfMatricula = new JTextField();
 		OuvinteDeTecladoDoCampoMatricula ouvinteMatricula = new OuvinteDeTecladoDoCampoMatricula();
-		tfMatricula.setBounds(120, 120, 140, 25);
+		tfMatricula.setBounds(235, 160, 140, 25);
 		tfMatricula.addFocusListener(ouvinte);
 		tfMatricula.addKeyListener(ouvinteMatricula);
 		add(tfMatricula);
 
 		tfEmail = new JTextField();
-		tfEmail.setBounds(100, 160, 270, 25);
+		tfEmail.setBounds(220, 200, 270, 25);
 		tfEmail.addFocusListener(ouvinte);
 		add(tfEmail);
 
 		pfSenha = new JPasswordField();
-		pfSenha.setBounds(60, 295, 140, 25);
+		pfSenha.setBounds(220, 295, 140, 25);
 		pfSenha.addFocusListener(ouvinte);
 		add(pfSenha);
 
 		pfConfirmarSenha = new JPasswordField();
-		pfConfirmarSenha.setBounds(210, 295, 140, 25);
+		pfConfirmarSenha.setBounds(380, 295, 140, 25);
 		add(pfConfirmarSenha);
 
 	}
@@ -359,30 +292,6 @@ public class TelaCadastroAluno extends TelaPadrao {
 
 	public void setBtSalvar(JButton btSalvar) {
 		this.btCadastrar = btSalvar;
-	}
-
-	public JButton getBtDeletar() {
-		return btDeletar;
-	}
-
-	public void setBtDeletar(JButton btDeletar) {
-		this.btDeletar = btDeletar;
-	}
-
-	public JButton getBtEditar() {
-		return btEditar;
-	}
-
-	public void setBtEditar(JButton btEditar) {
-		this.btEditar = btEditar;
-	}
-
-	public JTable getTabela() {
-		return tabela;
-	}
-
-	public void setTabela(JTable tabela) {
-		this.tabela = tabela;
 	}
 
 }
