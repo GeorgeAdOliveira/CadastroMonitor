@@ -11,5 +11,7 @@ public interface MetodosCoordenadorController {
 	public boolean coordenaodorExiste(CoordenadorDTO dto);
 	
 	public CoordenadorDTO verCoordenador(CoordenadorDTO dto);
+	
+	public boolean loginCoordenador(CoordenadorDTO dto);
 
 }

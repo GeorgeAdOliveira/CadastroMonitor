@@ -23,4 +23,7 @@ public class AlunoController {
 		return alunoModel.visualizarAlunos(dto);
 	}
 	
+	public boolean loginAluno(AlunoDTO dto) {
+		return alunoModel.loginAluno(dto);
+	}
 }

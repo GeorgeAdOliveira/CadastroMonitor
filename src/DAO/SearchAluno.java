@@ -14,5 +14,6 @@ public interface SearchAluno {
 	
 	public AlunoDTO listarAlunos(AlunoDTO aluno);
 	
+	public AlunoDTO loginAluno(AlunoDTO aluno);
 
 }

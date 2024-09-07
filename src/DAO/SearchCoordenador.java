@@ -11,4 +11,7 @@ public interface SearchCoordenador {
 	public CoordenadorDTO coordenadorExiste (CoordenadorDTO coordenador);
 	
 	public CoordenadorDTO verCoordenador (CoordenadorDTO coordenador);
+	
+	public CoordenadorDTO loginCoordenador (CoordenadorDTO coordenador);
+	
 }

@@ -86,9 +86,24 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		return aluno;
 	}
 
+	@Override
+	public AlunoDTO loginAluno(AlunoDTO aluno) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			if (a.getEmail().equals(aluno.getEmail())) {
+				if (a.getSenha().equals(aluno.getSenha())) {
+					aluno.setAlunoExiste(true);
+					return aluno;
+				}
+			}
+		}
+
+		return aluno;
+	}
+
 	// Adicionar Coordenador
 	public CoordenadorDTO adicionarCoordenador(CoordenadorDTO coordenador) {
-		if(coordenadorExiste(coordenador).getCoordenadorExiste()) {
+		if (coordenadorExiste(coordenador).getCoordenadorExiste()) {
 			return coordenador;
 		}
 		// criando coordenador
@@ -96,7 +111,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		coordenadorModel.setNome(coordenador.getNome());
 		coordenadorModel.setEmail(coordenador.getEmail());
 		coordenadorModel.setSenha(coordenador.getSenha());
-		//salvado coordenador no banco de dados
+		// salvado coordenador no banco de dados
 		bd = Persistencia.getInstance().recuperar();
 		bd.setCoordenador(coordenadorModel);
 		Persistencia.getInstance().salvar(bd);
@@ -118,7 +133,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 	// verificar se ja existe um coordenador no banco de dados
 	public CoordenadorDTO coordenadorExiste(CoordenadorDTO coordenador) {
 		bd = Persistencia.getInstance().recuperar();
-		if(bd.getCoordenador()!= null) {
+		if (bd.getCoordenador() != null) {
 			coordenador.setCoordenadorExiste(true);
 		}
 		return coordenador;
@@ -131,6 +146,17 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		coordenador.setNome(coordenadorModel.getNome());
 		coordenador.setEmail(coordenadorModel.getEmail());
 		coordenador.setSenha(coordenadorModel.getSenha());
+		return coordenador;
+	}
+
+	// Login coordenador verifica se é o cordenador que está fazendo o login
+	public CoordenadorDTO loginCoordenador(CoordenadorDTO coordenador) {
+		bd = Persistencia.getInstance().recuperar();
+		CoordenadorModel coordenadorModel = bd.getCoordenador();
+		if (coordenadorModel.getEmail().equals(coordenador.getEmail())
+				&& coordenadorModel.getSenha().equals(coordenador.getSenha())) {
+			coordenador.setCoordenadorExiste(true);
+		}
 		return coordenador;
 	}
 
@@ -157,4 +183,5 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

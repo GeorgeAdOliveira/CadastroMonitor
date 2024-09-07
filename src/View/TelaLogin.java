@@ -37,81 +37,49 @@ public class TelaLogin extends TelaPadraoImagem {
 	private class OuvinteDosBotoes implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-
+			// dados dos campos da tela
 			String email = tfEmail.getText();
 			String senha = new String(pfSenha.getPassword());
-			AlunoDTO alunoDto = new AlunoDTO();
-			alunoDto.setEmail(email);
-			alunoDto.setSenha(senha);
-
+			// coordenador para fazer a verificação
 			CoordenadorDTO coordenadorDto = new CoordenadorDTO();
 			coordenadorDto.setEmail(email);
 			coordenadorDto.setSenha(senha);
-
-			AlunoController alunoController = new AlunoController();
 			CoordenadorController coordenadorController = new CoordenadorController();
+			// aluno para fazer a verificação
+			AlunoDTO alunoDto = new AlunoDTO();
+			alunoDto.setEmail(email);
+			alunoDto.setSenha(senha);
+			AlunoController alunoController = new AlunoController();
 
 			switch (e.getActionCommand()) {
 			case "Entrar":
-				// Verificar se o usuário é um aluno
-				AlunoDTO aluno = alunoController.verAlunos(alunoDto);
-				if (aluno != null && aluno.getSenha().equals(senha)) {
-					new TelaMenuAluno(); // Abrir menu do aluno
-					dispose(); // Fechar janela de login
-
-					// Verificar se o usuário é o coordenador
-				} else if (coordenadorController.coordenaodorExiste(coordenadorDto)) {
-					CoordenadorDTO coordenador = coordenadorController.verCoordenador(coordenadorDto);
-					if (coordenador != null && coordenador.getSenha().equals(senha)) {
-						// new TelaCadastroAluno();
-						new TelaMenuCoordenador(); // Abrir menu do coordenador
-						dispose(); // Fechar janela de login
-					} else {
-						JOptionPane.showMessageDialog(null, "Senha errada para Coordenador!");
-					}
+				// Verificar se o usuário é o coordenador
+				if (coordenadorController.loginCoordenador(coordenadorDto)) {
+					new TelaMenuCoordenador();
+					dispose();
+					break;
+					// Verificar se o usuário é aluno
+				} else if (alunoController.loginAluno(alunoDto)) {
+					new TelaMenuAluno();
+					dispose();
+					break;
 				} else {
-					JOptionPane.showMessageDialog(null, "E-mail inexistente!");
+					JOptionPane.showMessageDialog(null, "Usuario Não encontrado!");
+					break;
 				}
-				break;
-//				//CentralDeInformacoes central = Persistencia.getInstance().recuperar();
-//
-//				String email = tfEmail.getText();
-//				String senha = new String(pfSenha.getPassword());
-//				switch(e.getActionCommand()) {
-//				case "Entrar":
 
-//					//Faz as verificações e entrar no menu correto 
-//					Coordenador coordenador = central.getCoordenador();
-//					Aluno aluno = central.recuperarAlunoPorEmail(email);
-//					if(aluno != null || coordenador.getEmail().equals(email)) {
-//						if(aluno != null && aluno.getSenha().equals(senha) && aluno.getEmail().equals(email)) {
-//							central.setAlunoLogado(aluno); //salva o aluno logado
-//							Persistencia.getInstance().salvar(central);
-//							new JanelaMenuAluno(); //Abrir menu do aluno
-//							dispose();//Fechar Janela
-//						} else if (coordenador.getEmail().equals(email) && coordenador.getSenha().equals(senha)){
-//							new JanelaMenuCoordenador();//Abrir menu do coordenador 
-//							dispose();//fechar janela
-//						} else {
-//							JOptionPane.showMessageDialog(null, "Senha errada!");
-//						}
-//					} else {
-//						JOptionPane.showMessageDialog(null,"E-mail inexistente!");
-//					}
-//					break;
-			// recuperar senha
-//				case "Recuperar senha":
+				// recuperar senha
+			case "Recuperar senha":
+				JOptionPane.showMessageDialog(null, "Falta fazer a logica desse botão!");
 //					new JanelaRecuperarSenha();
 //					dispose();
-//					break;
+				break;
 			// nova conta
 			case "Nova Conta":
 				new TelaCadastroAluno();
 				dispose();
 				break;
 			}
-//
-
 		}
 	}
 

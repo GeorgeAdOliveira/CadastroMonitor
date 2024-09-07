@@ -38,6 +38,10 @@ public class AlunoModel extends PessoaModel {
 	public AlunoDTO visualizarAlunos(AlunoDTO dto) {
 		return centralDAO.listarAlunos(dto);
 	}
+	
+	public boolean loginAluno(AlunoDTO dto) {
+		return centralDAO.loginAluno(dto).getAlunoExiste();
+	}
 
 	public String getMatricula() {
 		return matricula;

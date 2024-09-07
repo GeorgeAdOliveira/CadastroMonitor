@@ -26,4 +26,9 @@ public class CoordenadorModel extends PessoaModel {
 	public CoordenadorDTO verCoordenador(CoordenadorDTO dto) {
 		return centralDAO.verCoordenador(dto);
 	}
+	
+	public boolean loginCoordenador(CoordenadorDTO dto) {
+		return centralDAO.loginCoordenador(dto).getCoordenadorExiste();
+	}
+	
 }

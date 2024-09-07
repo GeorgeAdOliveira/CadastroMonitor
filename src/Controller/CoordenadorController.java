@@ -24,4 +24,8 @@ public class CoordenadorController implements MetodosCoordenadorController{
 	public boolean coordenaodorExiste(CoordenadorDTO dto) {
 		return coordenadorModel.coordenadorExiste(dto);
 	}
+
+	public boolean loginCoordenador(CoordenadorDTO dto) {
+		return coordenadorModel.loginCoordenador(dto);
+	}
 }
