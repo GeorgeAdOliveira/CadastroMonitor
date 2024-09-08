@@ -13,9 +13,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.AlunoController;
+import DTO.AlunoDTO;
 import Model.AlunoModel;
 
 public class TelaListarTodosAlunos extends TelaPadraoImagem {
+
+	private StrategyListarAlunos estrategia;
 
 	private ArrayList<AlunoModel> alunos;
 	private ArrayList<AlunoModel> listaAlunos;
@@ -24,6 +28,7 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 
 	public TelaListarTodosAlunos() {
 		super("Listar todos os Alunos", "Todos Os Alunos");
+		recuperarAlunos();
 		adicionarTabela();
 		adicionarBotoes();
 		adicionarLabel();
@@ -39,6 +44,15 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 				new TelaMenuCoordenador();
 				dispose();
 				break;
+
+			case "Listar Por Nome":
+				setEstrategia(new ListarAlunosNome());
+				executeStrategy();
+				break;
+			case "Listar Por Matricula":
+				setEstrategia(new ListarAlunosMatricula());
+				executeStrategy();
+				break;
 			case "Filtrar":
 				filtrarAlunos();
 				break;
@@ -48,12 +62,31 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 					JOptionPane.showMessageDialog(null, "Selecione um Aluno!");
 				} else {
 					AlunoModel aluno = listaAlunos.get(pessoaSelecionada);
-					//new JanelaPerfilDoAluno(aluno);
+					new TelaPerfilDoAluno(aluno);
 					dispose();
 				}
 				break;
 			}
 		}
+	}
+
+	public void executeStrategy() {
+		this.listaAlunos = alunos;
+		if (alunos != null) {
+			DefaultTableModel modelo = estrategia.ordenarLista(alunos);
+			// atualizando a tabela
+			tabela.setModel(modelo);
+			tabela.repaint();
+		}
+
+	}
+
+	// recuperando a lista de alunos
+	public void recuperarAlunos() {
+		AlunoController alunoController = new AlunoController();
+		AlunoDTO alunoDto = new AlunoDTO();
+		alunoDto = alunoController.verAlunos(alunoDto);
+		this.alunos = alunoDto.getAlunos();
 	}
 
 	// Filtrar aluno
@@ -71,7 +104,7 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 			}
 
 		}
-		//atualizando a tabela
+		// atualizando a tabela
 		tabela.setModel(modelo);
 		tabela.repaint();
 	}
@@ -82,7 +115,7 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 		DefaultTableModel modelo = new DefaultTableModel();
 
 		modelo.addColumn("Alunos");
-		//Lista com os alunos
+		// Lista com os alunos
 		if (alunos != null) {
 			for (AlunoModel aluno : alunos) {
 				listaAlunos.add(aluno);
@@ -103,6 +136,16 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 	public void adicionarBotoes() {
 		// Ouvinte interno
 		OuvinteDosBotoes ouvinte = new OuvinteDosBotoes();
+
+		JButton btListarNome = new JButton("Listar Por Nome");
+		btListarNome.setBounds(60, 350, 130, 30);
+		btListarNome.addActionListener(ouvinte);
+		add(btListarNome);
+
+		JButton btListar = new JButton("Listar Por Matricula");
+		btListar.setBounds(205, 350, 150, 30);
+		btListar.addActionListener(ouvinte);
+		add(btListar);
 
 		JButton btSalvar = new JButton("Visualizar Perfil");
 		btSalvar.setBounds(370, 350, 135, 30);
@@ -136,6 +179,18 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 		lbNome.setBounds(185, 290, 125, 30);
 		lbNome.setFont(font);
 		add(lbNome);
+	}
+
+	public StrategyListarAlunos getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(StrategyListarAlunos estrategia) {
+		this.estrategia = estrategia;
+	}
+
+	public static void main(String[] args) {
+		new TelaListarTodosAlunos();
 	}
 
 }
