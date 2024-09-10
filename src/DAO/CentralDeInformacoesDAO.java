@@ -189,14 +189,13 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 	public EditalDeMonitoriaDTO editarEdital(EditalDeMonitoriaDTO edital) {
 		bd = Persistencia.getInstance().recuperar();
 		ArrayList<EditalDeMonitoriaModel> editais = bd.getEditais();
+		LocalDate data = LocalDate.now();
 		for (EditalDeMonitoriaModel ed : editais) {
-			LocalDate data = LocalDate.now();
 			if (ed.getId() == edital.getId()) {
 				if (edital.getDataInicio().isAfter(data) || edital.getDataInicio().isEqual(data)) {
 					if (edital.getDataFim().isAfter(data) || edital.getDataFim().isEqual(data)) {
 						if (Integer.parseInt(ed.getQtdDeInscricaoPorAluno()) <= Integer
 								.parseInt(edital.getQtdDeInscricaoPorAluno())) {
-
 							ed.setNumeroDoEdital(edital.getNumeroDoEdital());
 							ed.setQtdDeInscricaoPorAluno(edital.getQtdDeInscricaoPorAluno());
 							ed.setSituacaoDoEdital(edital.getSituacaoDoEdital());

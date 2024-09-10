@@ -48,13 +48,13 @@ public class TelaDetalharEditalSemResultado extends TelaPadraoImagem{
 			case "Encerrar":
 				
 				EditalDeMonitoriaDTO editalDto = new EditalDeMonitoriaDTO(edital.getNumeroDoEdital(),edital.getQtdDeInscricaoPorAluno() ,
-						edital.getDataInicio(),LocalDate.now() ,edital.getPesoCRE(),
+						LocalDate.now(),edital.getDataFim() ,edital.getPesoCRE(),
 						edital.getPesoNota(), edital.getDisciplinas());
 				editalDto.setSituacaoDoEdital("Encerrado");
-				
+				editalDto.setId(edital.getId());
 				EditalController editalController = new EditalController();
 				
-				if(editalController.adicionarEdital(editalDto)) {
+				if(editalController.editarEdital(editalDto)) {
 					JOptionPane.showMessageDialog(null, "Edital Encerrado!");
 				}
 				new TelaListarEditais();
