@@ -43,13 +43,12 @@ public class TelaDetalharEditalSemResultado extends TelaPadraoImagem{
 				break;
 			// Encerrando o edital manualmente
 			case "Encerrar":
+//				Central.
 //				for (EditalDeMonitoriaModel ep : central.getTodosOsEditais()) {
 //					if (ep.getId() == edital.getId()) {
 //						ep.setSituacaoDoEdital("Encerrado");
 //						// ep.setDataFim(LocalDate.now());
-//					}
-//				}
-				//Persistencia.getInstance().salvar(central);
+
 				new TelaListarEditais();
 				dispose();
 				break;
@@ -65,7 +64,7 @@ public class TelaDetalharEditalSemResultado extends TelaPadraoImagem{
 					for (DisciplinaModel disciplina : edital.getDisciplinas()) {
 						if (!disciplina.getInscricoes().isEmpty()) {
 							cond = 1;
-							//new JanelaListarInscricao(edital);
+							new TelaListarInscricao(edital);
 							dispose();
 							break;
 						}

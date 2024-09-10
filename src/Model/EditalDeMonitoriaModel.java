@@ -57,6 +57,13 @@ public class EditalDeMonitoriaModel {
 		return "Encerrado";
 	}
 
+	// Calucular a media da nota do aluno
+	public float notaFinal(float notaCRE, float nota) {
+		float notaFinal = notaCRE * pesoCRE + nota * pesoNota;
+		return notaFinal;
+
+	}
+
 	public long getId() {
 		return id;
 	}

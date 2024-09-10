@@ -74,28 +74,28 @@ public class TelaListarEditais extends TelaPadraoImagem {
 //						dispose();
 					} else if (edital.getSituacaoDoEdital().equals("Aberto")
 							|| edital.getSituacaoDoEdital().equals("")) {
-//						if (edital.situacao().equals("Aberto")) {
-//							dispose();
-//							// Essa tela mostra o edital aberto
-//							new JanelaDetalharEditalSemResultado(edital);
-//						} else {
-//							String[] dataInicio = edital.getDataInicio().toString().split("-");
-//							String dataDeInicio = dataInicio[2] + "/" + dataInicio[1] + "/" + dataInicio[0];
-//							// ele so entra aqui se o edital tiver Fechado
-//							int op = JOptionPane.showConfirmDialog(null,
-//									"Edital Fechado so abre dia: " + dataDeInicio + "\n"
-//											+ "Deseja editar a data do Edital?",
-//									"Reabrir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//							if (op == JOptionPane.YES_OPTION) {
-//								// abre a tela de editar para editar a data
-//								new JanelaCadastrarEdital(edital, "Editar Edital de Monitoria");
-//								dispose();
-//								break;
-//							}
+						if (edital.situacao().equals("Aberto")) {				
+							// Essa tela mostra o edital aberto
+							new TelaDetalharEditalSemResultado(edital);
+							dispose();
+						} else {
+							String[] dataInicio = edital.getDataInicio().toString().split("-");
+							String dataDeInicio = dataInicio[2] + "/" + dataInicio[1] + "/" + dataInicio[0];
+							// ele so entra aqui se o edital tiver Fechado
+							int op = JOptionPane.showConfirmDialog(null,
+									"Edital Fechado so abre dia: " + dataDeInicio + "\n"
+											+ "Deseja editar a data do Edital?",
+									"Reabrir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+							if (op == JOptionPane.YES_OPTION) {
+								// abre a tela de editar para editar a data
+								new TelaCadastrarEdital(edital, "Editar Edital de Monitoria");
+								dispose();
+								break;
+							}
 						}
-//					} else {
-//						JOptionPane.showMessageDialog(null, "Selecione um Edital Aberto!");
-//					}
+					} else {
+						JOptionPane.showMessageDialog(null, "Selecione um Edital Aberto!");
+					}
 				}
 				break;
 			case "Gerar Resultado":
