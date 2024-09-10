@@ -5,6 +5,7 @@ import DTO.CoordenadorDTO;
 import DTO.EditalDeMonitoriaDTO;
 import Model.AlunoModel;
 import Model.CoordenadorModel;
+import Model.EditalDeMonitoriaModel;
 
 public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, SearchEditalDeMonitoria {
 
@@ -162,8 +163,14 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 
 	@Override
 	public EditalDeMonitoriaDTO adicionarEdital(EditalDeMonitoriaDTO edital) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		EditalDeMonitoriaModel editalModel = new EditalDeMonitoriaModel(edital.getNumeroDoEdital(),
+				edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(),
+				edital.getPesoCRE(), edital.getPesoNota(), edital.getDisciplinas());
+		bd.getEditais().add(editalModel);
+		Persistencia.getInstance().salvar(bd);
+		edital.setEditalExiste(true);
+		return edital;
 	}
 
 	@Override
@@ -182,6 +189,13 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 	public EditalDeMonitoriaDTO excluirEdital(EditalDeMonitoriaDTO edital) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public EditalDeMonitoriaDTO recuperarEditais(EditalDeMonitoriaDTO edital) {
+		bd = Persistencia.getInstance().recuperar();
+		edital.setEditais(bd.getEditais());
+		return edital;
 	}
 
 }

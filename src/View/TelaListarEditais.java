@@ -10,18 +10,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.EditalController;
+import DTO.EditalDeMonitoriaDTO;
 import Model.EditalDeMonitoriaModel;
 
 public class TelaListarEditais extends TelaPadraoImagem {
-	
+
+	EditalController editalControler = new EditalController();
+
 	private ArrayList<EditalDeMonitoriaModel> editais;
 	private JTable tabela;
+
 	public TelaListarEditais() {
 		super("Listar editais", "Listar Editais");
+		this.editais = editalControler.recuperarEditais(new EditalDeMonitoriaDTO()).getEditais();
 		adicionarBotoes();
 		adicionarTabela();
 		setVisible(true);
 	}
+
 	class OuvinteDosBotoes implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -37,8 +44,8 @@ public class TelaListarEditais extends TelaPadraoImagem {
 				if (editalSelecionado == -1) {
 					JOptionPane.showMessageDialog(null, "Selecione um Edital!");
 				} else {
-//					EditalDeMonitoria edital = editais.get(editalSelecionado);
-//					if (edital.getSituacaoDoEdital().equals("Resultado Preliminar")) {
+					EditalDeMonitoriaModel edital = editais.get(editalSelecionado);
+					if (edital.getSituacaoDoEdital().equals("Resultado Preliminar")) {
 //						edital = central.recuperarEditalPorID(edital.getId());
 //						// Calcula o resultado do edital
 //						for (Disciplina disciplina : edital.getDisciplinas()) {
@@ -50,7 +57,7 @@ public class TelaListarEditais extends TelaPadraoImagem {
 //								edital);
 //						dispose();
 //						// reabrir o edital encerrado
-//					} else if (edital.getSituacaoDoEdital().equals("Encerrado")) {
+					} else if (edital.getSituacaoDoEdital().equals("Encerrado")) {
 //
 //						int op = JOptionPane.showConfirmDialog(null, "Deseja reabrir o edital?", "Reabrir",
 //								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -61,12 +68,12 @@ public class TelaListarEditais extends TelaPadraoImagem {
 //							dispose();
 //						}
 //
-//					} else if (edital.getSituacaoDoEdital().equals("Resultado Final")) {
+					} else if (edital.getSituacaoDoEdital().equals("Resultado Final")) {
 //						// Essa tela mostra o resultado final do edital
 //						new TelaDetalharEditalResultado("Resultado Final", "Resultado Final", "coordenador", edital);
 //						dispose();
-//					} else if (edital.getSituacaoDoEdital().equals("Aberto")
-//							|| edital.getSituacaoDoEdital().equals("")) {
+					} else if (edital.getSituacaoDoEdital().equals("Aberto")
+							|| edital.getSituacaoDoEdital().equals("")) {
 //						if (edital.situacao().equals("Aberto")) {
 //							dispose();
 //							// Essa tela mostra o edital aberto
@@ -85,7 +92,7 @@ public class TelaListarEditais extends TelaPadraoImagem {
 //								dispose();
 //								break;
 //							}
-//						}
+						}
 //					} else {
 //						JOptionPane.showMessageDialog(null, "Selecione um Edital Aberto!");
 //					}
@@ -116,7 +123,8 @@ public class TelaListarEditais extends TelaPadraoImagem {
 //				}
 				break;
 			}
-		}
+	}
+
 	}
 
 	// Listar os editais na tabela
@@ -132,7 +140,7 @@ public class TelaListarEditais extends TelaPadraoImagem {
 				Object[] linha = new Object[2];
 				linha[0] = edital.getNumeroDoEdital();
 				if (edital.getSituacaoDoEdital() == "") {
-//					linha[1] = edital.situacao();
+					linha[1] = edital.situacao();
 				} else {
 					linha[1] = edital.getSituacaoDoEdital();
 				}

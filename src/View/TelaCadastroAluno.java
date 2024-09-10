@@ -293,5 +293,8 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 	public void setBtSalvar(JButton btSalvar) {
 		this.btCadastrar = btSalvar;
 	}
+	public static void main(String[] args) {
+		new TelaCadastroAluno();
+	}
 
 }

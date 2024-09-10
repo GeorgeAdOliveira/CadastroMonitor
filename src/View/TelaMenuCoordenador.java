@@ -26,7 +26,7 @@ public class TelaMenuCoordenador extends TelaPadraoImagem{
 
 				switch (e.getActionCommand()) {
 				case "Cadastrar Edital de Monitoria":
-					new TelaCadastrarEdital();
+					new TelaCadastrarEdital(null,"Novo edital de Monitoria");
 					dispose();
 					break;
 				case "Listar Editais":
@@ -77,5 +77,8 @@ public class TelaMenuCoordenador extends TelaPadraoImagem{
 			add(btSair);
 		
 	}
+		public static void main(String[] args) {
+			new TelaMenuCoordenador();
+		}
 
 }
