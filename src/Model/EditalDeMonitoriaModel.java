@@ -43,6 +43,9 @@ public class EditalDeMonitoriaModel {
 	public EditalDeMonitoriaDTO recuperarEditais(EditalDeMonitoriaDTO dto) {
 		return centralDAO.recuperarEditais(dto);
 	}
+	public boolean editarEdital(EditalDeMonitoriaDTO dto) {
+		return centralDAO.editarEdital(dto).editalExiste();
+	}
 
 	// Verificando se o edital esta aberto ou fechado
 	public String situacao() {

@@ -26,7 +26,7 @@ import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
 import Model.InscricaoModel;
 
-public class TelaCadastrarEdital extends TelaPadraoImagem  {
+public class TelaCadastrarEdital extends TelaPadraoImagem {
 
 	private JTextField tfNumeroDoEdital;
 	private JComboBox<String> cbQtdInscricao;
@@ -38,8 +38,7 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 	private long idDeVerificacao;
 	private boolean verificaEdicao = false;
 	private JTable tabela;
-	
-	
+
 	public TelaCadastrarEdital(EditalDeMonitoriaModel e, String titulo) {
 		super(titulo, titulo);
 		this.disciplinas = new ArrayList<>();
@@ -63,7 +62,7 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 		adicionarBotoes();
 		setVisible(true);
 	}
-	
+
 	public void preencherInformacoes(EditalDeMonitoriaModel e) {
 		tfNumeroDoEdital.setText(e.getNumeroDoEdital());
 		cbQtdInscricao.setSelectedIndex(Integer.parseInt(e.getQtdDeInscricaoPorAluno()) - 1);
@@ -74,8 +73,7 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 		tfPesoNota.setText("" + e.getPesoNota());
 		disciplinas = e.getDisciplinas();
 	}
-	
-	
+
 	class OuvinteDosBotoes implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -133,38 +131,28 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 								String QtdMaximaDeInscricao = (String) cbQtdInscricao.getSelectedItem();
 
 								// Criando edital
-								EditalDeMonitoriaDTO edital = new EditalDeMonitoriaDTO(numeroDoEdital, QtdMaximaDeInscricao,
-										dataInicio, dataFim, pesoCRE, pesoNota, disciplinas);
+								EditalDeMonitoriaDTO edital = new EditalDeMonitoriaDTO(numeroDoEdital,
+										QtdMaximaDeInscricao, dataInicio, dataFim, pesoCRE, pesoNota, disciplinas);
 								EditalController editalController = new EditalController();
-								if(editalController.adicionarEdital(edital)) {
-									JOptionPane.showMessageDialog(null, "Edital adicionado com sucesso!");
+
+								if (idDeVerificacao != 0) { // chama o metodo editar
+									if (editalController.editarEdital(edital)) {
+										JOptionPane.showMessageDialog(null, "Edital Editado!");
+									} else {
+										JOptionPane.showMessageDialog(null,
+												"Não foi possivel editar, alguma informação esta errada!");
+									}
+
 								} else {
-									JOptionPane.showMessageDialog(null, "Não foi possivel adicionar o Edital!");
+									if (editalController.adicionarEdital(edital)) {
+										JOptionPane.showMessageDialog(null, "Edital adicionado com sucesso!");
+									} else {
+										JOptionPane.showMessageDialog(null,
+												"Não foi possivel adicionar, Edital já existe!");
+									}
 								}
 								new TelaMenuCoordenador();
 								dispose();
-//								if (idDeVerificacao != 0) { // chama o metodo editar
-//									edital = validarEdital(idDeVerificacao, dataInicio, dataFim, pesoCRE, pesoNota,
-//											disciplinas, QtdMaximaDeInscricao);
-//									if (verificaEdicao) {
-//										//Editando e salvando
-//										central.adicionarEdital(edital);
-//										JOptionPane.showMessageDialog(null, "Edital Editado!");
-//										Persistencia.getInstance().salvar(central);
-//										new JanelaMenuCoordenador();
-//										dispose();
-//									}
-//									break;
-//								}
-//
-//								else if (central.adicionarEdital(edital)) {
-//									JOptionPane.showMessageDialog(null, "Edital Adicionado!");
-//									Persistencia.getInstance().salvar(central);
-//									new JanelaMenuCoordenador();
-//									dispose();
-//								} else {
-//									JOptionPane.showMessageDialog(null, "O edital já existe no sistema!");
-//								}
 							} else {
 								JOptionPane.showMessageDialog(null, "O número do edital não pode ser vazio!");
 							}
@@ -192,7 +180,7 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 						disciplinas.remove(linhaSelecionada);
 						atualizarJScrollPane();
 					}
-					
+
 				}
 				break;
 			}
@@ -200,37 +188,6 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 		}
 
 	}
-
-	// metodo para editar edital
-//	public EditalDeMonitoriaModel validarEdital(long id, LocalDate dataInicio, LocalDate dataFim, float pesoCRE,
-//			float pesoNota, ArrayList<DisciplinaModel> disciplinas, String qtd) {
-//
-//		EditalDeMonitoriaModel edital = 
-//		LocalDate data = LocalDate.now();
-//
-//		if (dataInicio.isAfter(data) || dataInicio.isEqual(data)) {
-//			if (dataFim.isAfter(data) || dataFim.isEqual(data)) {
-//				if (Integer.parseInt(edital.getQtdDeInscricaoPorAluno()) <= Integer.parseInt(qtd)) {
-//					edital.setDataInicio(dataInicio);
-//					edital.setDataFim(dataFim);
-//					edital.setPesoCRE(pesoCRE);
-//					edital.setPesoNota(pesoNota);
-//					edital.setDisciplinas(disciplinas);
-//					edital.setQtdDeInscricaoPorAluno(qtd);
-//					verificaEdicao = true;
-//				} else {
-//					JOptionPane.showMessageDialog(null, "A quantidade máxima não pode ser diminuida");
-//				}
-//
-//			} else {
-//				JOptionPane.showMessageDialog(null, "Data final não pode ser anterior da data atual");
-//			}
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Data início não pode ser anterior da data atual");
-//
-//		}
-//		return edital;
-//	}
 
 	public boolean adicionarDiscipina(DisciplinaModel disciplina) {
 		disciplinas.add(disciplina);
@@ -270,7 +227,7 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 
 	public void adicionarLabel() {
 		Font font = new Font("Georgia", Font.ITALIC, 15);
-		
+
 		JLabel lbDataInicio = new JLabel("Data Inicio:");
 		lbDataInicio.setBounds(200, 90, 100, 20);
 		lbDataInicio.setFont(font);
@@ -386,7 +343,5 @@ public class TelaCadastrarEdital extends TelaPadraoImagem  {
 	public static ArrayList<DisciplinaModel> getDisciplinas() {
 		return disciplinas;
 	}
-	
-	
-	
+
 }

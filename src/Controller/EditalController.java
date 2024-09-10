@@ -13,5 +13,9 @@ public class EditalController {
 	public EditalDeMonitoriaDTO recuperarEditais(EditalDeMonitoriaDTO dto) {
 		return edital.recuperarEditais(dto);
 	}
+	
+	public boolean editarEdital(EditalDeMonitoriaDTO dto) {
+		return edital.editarEdital(dto);
+	}
 
 }

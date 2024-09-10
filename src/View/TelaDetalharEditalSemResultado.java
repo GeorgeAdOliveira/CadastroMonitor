@@ -3,6 +3,7 @@ package View;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.EditalController;
+import DTO.EditalDeMonitoriaDTO;
 import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
 
@@ -43,12 +46,17 @@ public class TelaDetalharEditalSemResultado extends TelaPadraoImagem{
 				break;
 			// Encerrando o edital manualmente
 			case "Encerrar":
-//				Central.
-//				for (EditalDeMonitoriaModel ep : central.getTodosOsEditais()) {
-//					if (ep.getId() == edital.getId()) {
-//						ep.setSituacaoDoEdital("Encerrado");
-//						// ep.setDataFim(LocalDate.now());
-
+				
+				EditalDeMonitoriaDTO editalDto = new EditalDeMonitoriaDTO(edital.getNumeroDoEdital(),edital.getQtdDeInscricaoPorAluno() ,
+						edital.getDataInicio(),LocalDate.now() ,edital.getPesoCRE(),
+						edital.getPesoNota(), edital.getDisciplinas());
+				editalDto.setSituacaoDoEdital("Encerrado");
+				
+				EditalController editalController = new EditalController();
+				
+				if(editalController.adicionarEdital(editalDto)) {
+					JOptionPane.showMessageDialog(null, "Edital Encerrado!");
+				}
 				new TelaListarEditais();
 				dispose();
 				break;

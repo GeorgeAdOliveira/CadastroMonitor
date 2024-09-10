@@ -1,37 +1,44 @@
 <DAO.BancoDeDados>
-  <coordenador>
-    <nome>Cleyton</nome>
-    <email>cleyton@gmail.com</email>
-    <senha>1234</senha>
-    <centralDAO/>
-  </coordenador>
   <alunos/>
   <editais>
     <Model.EditalDeMonitoriaModel>
       <centralDAO/>
-      <id>1725934698085</id>
-      <numeroDoEdital>2024.16</numeroDoEdital>
-      <qtdDeInscricaoPorAluno>2</qtdDeInscricaoPorAluno>
+      <id>1725991018007</id>
+      <numeroDoEdital>2024.5</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
       <situacaoDoEdital></situacaoDoEdital>
       <dataInicio>2024-09-08</dataInicio>
-      <dataFim>2024-09-20</dataFim>
+      <dataFim>2024-11-08</dataFim>
       <pesoCRE>0.5</pesoCRE>
       <pesoNota>0.5</pesoNota>
       <disciplinas>
         <Model.DisciplinaModel>
           <nomeDaDisciplina>Poo</nomeDaDisciplina>
-          <qtdVagasVoluntario>2</qtdVagasVoluntario>
-          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>2</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1725992356908</id>
+      <numeroDoEdital>2024.6</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-08</dataInicio>
+      <dataFim>2024-11-08</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>Poo</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>2</qtdVagasRemunerada>
           <inscricoes/>
         </Model.DisciplinaModel>
         <Model.DisciplinaModel>
-          <nomeDaDisciplina>EDA</nomeDaDisciplina>
-          <qtdVagasVoluntario>1</qtdVagasVoluntario>
-          <qtdVagasRemunerada>1</qtdVagasRemunerada>
-          <inscricoes/>
-        </Model.DisciplinaModel>
-        <Model.DisciplinaModel>
-          <nomeDaDisciplina>PP</nomeDaDisciplina>
+          <nomeDaDisciplina>MAC</nomeDaDisciplina>
           <qtdVagasVoluntario>0</qtdVagasVoluntario>
           <qtdVagasRemunerada>1</qtdVagasRemunerada>
           <inscricoes/>

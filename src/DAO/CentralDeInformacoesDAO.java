@@ -1,5 +1,8 @@
 package DAO;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import DTO.AlunoDTO;
 import DTO.CoordenadorDTO;
 import DTO.EditalDeMonitoriaDTO;
@@ -164,9 +167,18 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 	@Override
 	public EditalDeMonitoriaDTO adicionarEdital(EditalDeMonitoriaDTO edital) {
 		bd = Persistencia.getInstance().recuperar();
+		ArrayList<EditalDeMonitoriaModel> editais = bd.getEditais();
+		for (EditalDeMonitoriaModel ed : editais) {
+			if (ed.getId() == edital.getId()) {
+				return edital;
+			}
+			if (ed.getNumeroDoEdital().equals(edital.getNumeroDoEdital())) {
+				return edital;
+			}
+		}
 		EditalDeMonitoriaModel editalModel = new EditalDeMonitoriaModel(edital.getNumeroDoEdital(),
-				edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(),
-				edital.getPesoCRE(), edital.getPesoNota(), edital.getDisciplinas());
+				edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(), edital.getPesoCRE(),
+				edital.getPesoNota(), edital.getDisciplinas());
 		bd.getEditais().add(editalModel);
 		Persistencia.getInstance().salvar(bd);
 		edital.setEditalExiste(true);
@@ -175,8 +187,41 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 
 	@Override
 	public EditalDeMonitoriaDTO editarEdital(EditalDeMonitoriaDTO edital) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		ArrayList<EditalDeMonitoriaModel> editais = bd.getEditais();
+		for (EditalDeMonitoriaModel ed : editais) {
+			LocalDate data = LocalDate.now();
+			if (ed.getId() == edital.getId()) {
+				if (edital.getDataInicio().isAfter(data) || edital.getDataInicio().isEqual(data)) {
+					if (edital.getDataFim().isAfter(data) || edital.getDataFim().isEqual(data)) {
+						if (Integer.parseInt(ed.getQtdDeInscricaoPorAluno()) <= Integer
+								.parseInt(edital.getQtdDeInscricaoPorAluno())) {
+
+							ed.setNumeroDoEdital(edital.getNumeroDoEdital());
+							ed.setQtdDeInscricaoPorAluno(edital.getQtdDeInscricaoPorAluno());
+							ed.setSituacaoDoEdital(edital.getSituacaoDoEdital());
+							ed.setDataInicio(edital.getDataInicio());
+							ed.setDataFim(edital.getDataFim());
+							ed.setPesoCRE(edital.getPesoCRE());
+							ed.setPesoNota(edital.getPesoNota());
+							ed.setDisciplinas(edital.getDisciplinas());
+							Persistencia.getInstance().salvar(bd);
+							edital.setEditalExiste(true);
+							return edital;
+							
+						} else {
+							return edital;
+						}
+					} else {
+						return edital;
+					}
+				} else {
+					return edital;
+				}
+			}
+		}
+		return edital;
+		
 	}
 
 	@Override
