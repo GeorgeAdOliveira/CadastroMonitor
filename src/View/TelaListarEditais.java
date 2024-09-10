@@ -12,9 +12,16 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.EditalController;
 import DTO.EditalDeMonitoriaDTO;
+import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
+import Model.InscricaoModel;
 
 public class TelaListarEditais extends TelaPadraoImagem {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	EditalController editalControler = new EditalController();
 
@@ -46,32 +53,45 @@ public class TelaListarEditais extends TelaPadraoImagem {
 				} else {
 					EditalDeMonitoriaModel edital = editais.get(editalSelecionado);
 					if (edital.getSituacaoDoEdital().equals("Resultado Preliminar")) {
-//						edital = central.recuperarEditalPorID(edital.getId());
-//						// Calcula o resultado do edital
-//						for (Disciplina disciplina : edital.getDisciplinas()) {
-//							disciplina.calcularResultado();
-//						}
-//						Persistencia.getInstance().salvar(central);
-//						// Essa tela mostra o resultado preliminar do edital
-//						new TelaDetalharEditalResultado("Resultado Preliminar", "Resultado Preliminar", "coordenador",
-//								edital);
-//						dispose();
-//						// reabrir o edital encerrado
+
+						// Calcula o resultado do edital
+						for (DisciplinaModel disciplina : edital.getDisciplinas()) {
+							disciplina.calcularResultado();
+						}
+						
+						EditalDeMonitoriaDTO editalDto = new EditalDeMonitoriaDTO(edital.getNumeroDoEdital(),
+								edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(), edital.getPesoCRE(),
+								edital.getPesoNota(), edital.getDisciplinas());
+						editalDto.setId(edital.getId());
+						editalDto.setSituacaoDoEdital(edital.getSituacaoDoEdital());
+						
+						editalControler.editarEdital(editalDto);
+						
+						// Essa tela mostra o resultado preliminar do edital
+						new TelaDetalharEditalResultado("Resultado Preliminar",
+								"Resultado Preliminar", "coordenador",edital);
+						dispose();
+						// reabrir o edital encerrado
 					} else if (edital.getSituacaoDoEdital().equals("Encerrado")) {
-//
-//						int op = JOptionPane.showConfirmDialog(null, "Deseja reabrir o edital?", "Reabrir",
-//								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//						if (op == JOptionPane.YES_OPTION) {
-//							central.recuperarEditalPorID(edital.getId()).setSituacaoDoEdital("Aberto");
-//							Persistencia.getInstance().salvar(central);
-//							new JanelaListarEditais();
-//							dispose();
-//						}
-//
+
+						int op = JOptionPane.showConfirmDialog(null, "Deseja reabrir o edital?", "Reabrir",
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						if (op == JOptionPane.YES_OPTION) {
+							EditalDeMonitoriaDTO editalDto = new EditalDeMonitoriaDTO(edital.getNumeroDoEdital(),
+									edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(), edital.getPesoCRE(),
+									edital.getPesoNota(), edital.getDisciplinas());
+							editalDto.setId(edital.getId());
+							editalDto.setSituacaoDoEdital("Aberto");
+							
+							editalControler.editarEdital(editalDto);
+							new TelaListarEditais();
+							dispose();
+						}
+
 					} else if (edital.getSituacaoDoEdital().equals("Resultado Final")) {
-//						// Essa tela mostra o resultado final do edital
-//						new TelaDetalharEditalResultado("Resultado Final", "Resultado Final", "coordenador", edital);
-//						dispose();
+						// Essa tela mostra o resultado final do edital
+						new TelaDetalharEditalResultado("Resultado Final", "Resultado Final", "coordenador", edital);
+						dispose();
 					} else if (edital.getSituacaoDoEdital().equals("Aberto")
 							|| edital.getSituacaoDoEdital().equals("")) {
 						if (edital.situacao().equals("Aberto")) {				
@@ -99,28 +119,34 @@ public class TelaListarEditais extends TelaPadraoImagem {
 				}
 				break;
 			case "Gerar Resultado":
-//				editalSelecionado = tabela.getSelectedRow();
-//				if (editalSelecionado == -1) {
-//					JOptionPane.showMessageDialog(null, "Selecione um Edital!");
-//				} else {
-//					EditalDeMonitoria edital = central.recuperarEditalPorID(editais.get(editalSelecionado).getId());
-//					edital.setSituacaoDoEdital("Resultado Preliminar");
-//					//Calculando a nota final de cada disciplina
-//					for (Disciplina disciplina : edital.getDisciplinas()) {
-//						for (Inscricao i : disciplina.getInscricoes()) {
-//							i.setNotaFinal(edital.notaFinal(i.getNotaCRE(), i.getNotaDisciplina()));
-//						}
-//
-//					}
-//					//calculando o resultado
-//					for (Disciplina disciplina : edital.getDisciplinas()) {
-//						disciplina.calcularResultado();
-//					}
-//
-//					Persistencia.getInstance().salvar(central);
-//					dispose();
-//					new JanelaListarEditais();
-//				}
+				editalSelecionado = tabela.getSelectedRow();
+				if (editalSelecionado == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione um Edital!");
+				} else {
+					EditalDeMonitoriaModel edital = editais.get(editalSelecionado);
+					edital.setSituacaoDoEdital("Resultado Preliminar");
+					//Calculando a nota final de cada disciplina
+					for (DisciplinaModel disciplina : edital.getDisciplinas()) {
+						for (InscricaoModel i : disciplina.getInscricoes()) {
+							i.setNotaFinal(edital.notaFinal(i.getNotaCRE(), i.getNotaDisciplina()));
+						}
+
+					}
+					//calculando o resultado
+					for (DisciplinaModel disciplina : edital.getDisciplinas()) {
+						disciplina.calcularResultado();
+					}
+
+					EditalDeMonitoriaDTO editalDto = new EditalDeMonitoriaDTO(edital.getNumeroDoEdital(),
+							edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(), edital.getPesoCRE(),
+							edital.getPesoNota(), edital.getDisciplinas());
+					editalDto.setId(edital.getId());
+					editalDto.setSituacaoDoEdital(edital.getSituacaoDoEdital());
+					
+					editalControler.editarEdital(editalDto);
+					new TelaListarEditais();
+					dispose();
+				}
 				break;
 			}
 	}

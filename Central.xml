@@ -6,7 +6,7 @@
       <id>1725991018007</id>
       <numeroDoEdital>2024.5</numeroDoEdital>
       <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
-      <situacaoDoEdital>Encerrado</situacaoDoEdital>
+      <situacaoDoEdital>Resultado Preliminar</situacaoDoEdital>
       <dataInicio>2024-09-10</dataInicio>
       <dataFim>2024-11-08</dataFim>
       <pesoCRE>0.5</pesoCRE>
@@ -25,7 +25,7 @@
       <id>1725992356908</id>
       <numeroDoEdital>2024.6</numeroDoEdital>
       <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
-      <situacaoDoEdital></situacaoDoEdital>
+      <situacaoDoEdital>Aberto</situacaoDoEdital>
       <dataInicio>2024-09-10</dataInicio>
       <dataFim>2024-11-08</dataFim>
       <pesoCRE>0.5</pesoCRE>

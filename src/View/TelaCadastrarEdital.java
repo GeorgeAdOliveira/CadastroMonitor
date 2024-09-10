@@ -36,7 +36,6 @@ public class TelaCadastrarEdital extends TelaPadraoImagem {
 	private JTextField tfPesoNota;
 	private static ArrayList<DisciplinaModel> disciplinas;
 	private long idDeVerificacao;
-	//private boolean verificaEdicao = false;
 	private JTable tabela;
 
 	public TelaCadastrarEdital(EditalDeMonitoriaModel e, String titulo) {
