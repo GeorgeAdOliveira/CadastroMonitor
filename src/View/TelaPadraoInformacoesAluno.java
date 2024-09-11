@@ -33,6 +33,7 @@ public class TelaPadraoInformacoesAluno extends TelaPadraoImagem {
 	public TelaPadraoInformacoesAluno(String titulo, String tituloPadrao) {
 		super(titulo, tituloPadrao);
 		adicionarLabel();
+		adicionarBotoes();
 
 	}
 
@@ -134,6 +135,7 @@ public class TelaPadraoInformacoesAluno extends TelaPadraoImagem {
 	}
 
 	public void adicionarBotoes() {
+		
 		// ouvinte interno
 		OuvinteDoBotaoSalvar ouvinte = new OuvinteDoBotaoSalvar();
 		btSalvar = new JButton("Cadastrar");

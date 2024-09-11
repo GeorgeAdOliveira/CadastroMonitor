@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import DTO.AlunoDTO;
 import Model.AlunoModel;
 
 public class TelaPerfilDoAluno extends TelaPadraoImagem {
@@ -38,7 +39,14 @@ public class TelaPerfilDoAluno extends TelaPadraoImagem {
 				dispose();
 				break;
 			case "Editar Perfil":
-				//new JanelaEditarInformacoesAluno(aluno, "Coordenador");
+				AlunoDTO alunoDto = new AlunoDTO();
+				alunoDto.setNome(aluno.getNome());
+				alunoDto.setMatricula(aluno.getMatricula());
+				alunoDto.setEmail(aluno.getEmail());
+				alunoDto.setSenha(aluno.getSenha());
+				alunoDto.setSexo(aluno.getSexo());
+				alunoDto.setMensagem(aluno.getMensagem());
+				new TelaEditarInformacoesAluno(alunoDto, "Coordenador");
 				dispose();
 				break;
 			}

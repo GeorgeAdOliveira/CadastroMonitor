@@ -49,6 +49,10 @@ public class AlunoModel extends PessoaModel implements Mensageiro{
 		return centralDAO.loginAluno(dto).getAlunoExiste();
 	}
 
+	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno) {
+		return centralDAO.recuperarAlunoPelaMtricula(aluno);
+	}
+	
 	public String getMatricula() {
 		return matricula;
 	}

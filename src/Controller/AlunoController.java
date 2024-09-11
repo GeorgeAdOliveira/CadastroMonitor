@@ -30,4 +30,8 @@ public class AlunoController {
 	public String recuperarMatricula(AlunoDTO aluno) {
 		return alunoModel.recuperarMatricula(aluno).getMatricula();
 	}
+	
+	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno) {
+		return alunoModel.recuperarAlunoPelaMtricula(aluno);
+	}
 }

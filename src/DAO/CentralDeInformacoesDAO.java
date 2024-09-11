@@ -61,6 +61,23 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		
 		return aluno;
 	}
+	
+	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			if (a.getMatricula().equals(aluno.getMatricula())) {
+				aluno.setNome(a.getNome());
+				aluno.setMatricula(a.getMatricula());
+				aluno.setEmail(a.getEmail());
+				aluno.setSenha(a.getSenha());
+				aluno.setSexo(a.getSexo());
+				aluno.setMensagem(a.getMensagem());
+				return aluno;
+			}
+		}
+		
+		return aluno;
+	}
 
 	// Excluir Aluno
 	public AlunoDTO excluirAluno(AlunoDTO aluno) {

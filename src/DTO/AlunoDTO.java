@@ -15,6 +15,7 @@ public class AlunoDTO {
 	private boolean alunoExiste;
 	private boolean alunoCriado;
 	private ArrayList<AlunoModel> alunos;
+	private String mensagem;
 
 	public AlunoDTO() {
 
@@ -98,6 +99,14 @@ public class AlunoDTO {
 
 	public void setIndiceLista(int indiceLista) {
 		this.indiceLista = indiceLista;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }

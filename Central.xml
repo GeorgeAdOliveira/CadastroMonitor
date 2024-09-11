@@ -7,7 +7,7 @@
   </coordenador>
   <alunos>
     <Model.AlunoModel>
-      <nome>George</nome>
+      <nome>George Azevedo de Oliveira</nome>
       <email>george@gmail.com</email>
       <senha>1234</senha>
       <centralDAO/>
