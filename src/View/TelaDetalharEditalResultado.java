@@ -20,7 +20,6 @@ public class TelaDetalharEditalResultado extends TelaPadraoImagem {
 	 */
 	private static final long serialVersionUID = 1L;
 	private EditalDeMonitoriaModel edital;
-	//private CentralDeInformacoes central = Persistencia.getInstance().recuperar();
 	private JTable tabela;
 	private String usuario;
 

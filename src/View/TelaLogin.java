@@ -60,7 +60,8 @@ public class TelaLogin extends TelaPadraoImagem {
 					break;
 					// Verificar se o usuário é aluno
 				} else if (alunoController.loginAluno(alunoDto)) {
-					new TelaMenuAluno();
+					String matricula = alunoController.recuperarMatricula(alunoDto);
+					new TelaMenuAluno(matricula);
 					dispose();
 					break;
 				} else {

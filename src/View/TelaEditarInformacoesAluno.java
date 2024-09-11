@@ -7,8 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import DTO.AlunoDTO;
+import Model.Sexo;
 
-public class TelaEditarInformacoesAluno extends TelaCadastroAluno {
+public class TelaEditarInformacoesAluno extends TelaPadraoInformacoesAluno {
 	/**
 	 * 
 	 */
@@ -17,12 +18,23 @@ public class TelaEditarInformacoesAluno extends TelaCadastroAluno {
 	private AlunoDTO aluno;
 	private String usuario;
 
-	public TelaEditarInformacoesAluno(){//AlunoDTO aluno, String usuario) {
-		super();//"Editar Informações Pessoais", "Editar Informações");
+	
+	
+	public TelaEditarInformacoesAluno(AlunoDTO aluno, String usuario){
+		super("Editar Informações Pessoais", "Editar Informações");
 		this.aluno = aluno;
 		this.usuario = usuario;
-//		adicionarTextFields(aluno.getNome(), aluno.getMatricula(), aluno.getEmail(), aluno.getSenha());
-//		adicionarCombo(aluno.getSexo());
+		adicionarTextFields(aluno.getNome(), aluno.getMatricula(), aluno.getEmail(), aluno.getSenha());
+		if(aluno.getSexo().equals("MASCULINO")) {
+			adicionarCombo(Sexo.MASCULINO);
+		}else if(aluno.getSexo().equals("FEMININO")) {
+			adicionarCombo(Sexo.FEMININO);
+		} else {
+			adicionarCombo(Sexo.OUTRO);
+		}
+		
+		//adicionarCombo(aluno.getSexo());
+		//adicionarCombo(aluno.getSexo());
 		adicionarBotoes();
 		setVisible(true);
 
@@ -34,13 +46,14 @@ public class TelaEditarInformacoesAluno extends TelaCadastroAluno {
 			switch (e.getActionCommand()) {
 			case "Voltar":
 				//verifica quem é o usuario e abre a tela corespondente
-				if(usuario.equals("Aluno")) {
-					  new TelaMenuAluno();
+				if(!usuario.equals("Aluno")) {
+					  new TelaMenuAluno(usuario);
                 }
                 dispose();
                 break;
 			case "Salvar":
 				try {
+					
 					 String nome = getTfNome().getText();
                      String matricula = getTfMatricula().getText();
                      String email = getTfEmail().getText();
@@ -76,7 +89,7 @@ public class TelaEditarInformacoesAluno extends TelaCadastroAluno {
 //					JOptionPane.showMessageDialog(null, "As Informações foram Atualizadas!");
 //					//Vai definir Qual Janela Abrir
 					if(usuario.equals("Aluno")) {
-						new TelaMenuAluno();
+						new TelaMenuAluno(matricula);
 					} //else {
 //						new JanelaPerfilDoAluno(alunoEditar);
 //					}
@@ -105,9 +118,6 @@ public class TelaEditarInformacoesAluno extends TelaCadastroAluno {
 
 	}
 	}
-	public static void main(String[] args) {
-		new TelaEditarInformacoesAluno();
-		
-	}
+
 
 }

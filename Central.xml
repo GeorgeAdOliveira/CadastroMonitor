@@ -1,5 +1,20 @@
 <DAO.BancoDeDados>
-  <alunos/>
+  <coordenador>
+    <nome>Cleyton</nome>
+    <email>cleyton@gmail.com</email>
+    <senha>1234</senha>
+    <centralDAO/>
+  </coordenador>
+  <alunos>
+    <Model.AlunoModel>
+      <nome>George</nome>
+      <email>george@gmail.com</email>
+      <senha>1234</senha>
+      <centralDAO/>
+      <matricula>202225020037</matricula>
+      <sexo>MASCULINO</sexo>
+    </Model.AlunoModel>
+  </alunos>
   <editais>
     <Model.EditalDeMonitoriaModel>
       <centralDAO/>

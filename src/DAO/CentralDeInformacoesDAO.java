@@ -49,6 +49,18 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		aluno.setAlunoExiste(false);
 		return aluno;
 	}
+	@Override
+	public AlunoDTO recuperarMatricula(AlunoDTO aluno) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			if (a.getEmail().equals(aluno.getEmail())) {
+				aluno.setMatricula(a.getMatricula());
+				return aluno;
+			}
+		}
+		
+		return aluno;
+	}
 
 	// Excluir Aluno
 	public AlunoDTO excluirAluno(AlunoDTO aluno) {
@@ -241,5 +253,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		edital.setEditais(bd.getEditais());
 		return edital;
 	}
+
+	
 
 }

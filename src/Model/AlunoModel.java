@@ -4,17 +4,19 @@ import java.util.ArrayList;
 
 import DAO.CentralDeInformacoesDAO;
 import DTO.AlunoDTO;
+import View.Mensageiro;
 
 /*
  * @author George
  */
 
-public class AlunoModel extends PessoaModel {
+public class AlunoModel extends PessoaModel implements Mensageiro{
 
 	private CentralDeInformacoesDAO centralDAO = new CentralDeInformacoesDAO();
 
 	private String matricula;
 	private String sexo;
+	private String mensagem;
 
 	public boolean salvarAluno(AlunoDTO dto) {
 		return centralDAO.adicionarAluno(dto).getAlunoCriado();
@@ -35,6 +37,10 @@ public class AlunoModel extends PessoaModel {
 		return false;
 	}
 
+	public AlunoDTO recuperarMatricula(AlunoDTO aluno) {
+		return centralDAO.recuperarMatricula(aluno);
+	}
+	
 	public AlunoDTO visualizarAlunos(AlunoDTO dto) {
 		return centralDAO.listarAlunos(dto);
 	}
@@ -57,6 +63,20 @@ public class AlunoModel extends PessoaModel {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+
+	@Override
+	public void atualizarMensagem(String mensagem) {
+		setMensagem(mensagem);
+		
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }

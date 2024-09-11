@@ -6,9 +6,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import DTO.AlunoDTO;
+
 public class TelaMenuAluno extends TelaPadraoImagem {
-	public TelaMenuAluno() {
+	
+	private String matricula;
+	
+	public TelaMenuAluno(String matricula) {
 		super("Menu do Aluno", "Menu Aluno");
+		this.matricula = matricula;
 		adicionarBotoes();
 		setVisible(true);
 	}
@@ -18,7 +24,7 @@ public class TelaMenuAluno extends TelaPadraoImagem {
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand()) {
 			case "Listar Editais":
-//				new JanelaListarEditaisAlunos();
+				new TelaListarEditaisAlunos(matricula);
 				dispose();
 				break;
 			case "Sair":
@@ -26,7 +32,8 @@ public class TelaMenuAluno extends TelaPadraoImagem {
 				dispose();
 				break;
 			case "Editar Informações Pessoais":
-//				new JanelaEditarInformacoesAluno(Persistencia.getInstance().recuperar().getAlunoLogado(), "Aluno");
+				AlunoDTO aluno = new AlunoDTO();
+				new TelaEditarInformacoesAluno(aluno,matricula);
 				dispose();
 				break;
 			}
@@ -60,6 +67,4 @@ public class TelaMenuAluno extends TelaPadraoImagem {
 		add(btSair);
 
 	}
-	
-
 }

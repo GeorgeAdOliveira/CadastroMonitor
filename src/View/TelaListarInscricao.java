@@ -2,12 +2,15 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Model.AlunoModel;
 import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
 import Model.InscricaoModel;
@@ -20,15 +23,35 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 	private static final long serialVersionUID = 1L;
 	private EditalDeMonitoriaModel edital;
 	private JTable tabela;
+	private ArrayList<Mensageiro> alunos;
 	
 	public TelaListarInscricao(EditalDeMonitoriaModel edital) {
 		super("Lista de Inscrição", "Lista de Inscrição");
 		this.edital = edital;
-
+			for(DisciplinaModel d :edital.getDisciplinas()) {
+				for(InscricaoModel i : d.getInscricoes()) {
+					adicionarAluno(i.getAluno());
+				}
+			}
+			
+				
 		adicionarBotoes();
 		adicionarTabela();
 		setVisible(true);
 	}
+	
+	public void adicionarAluno(Mensageiro mensageiro) {
+		alunos.add(mensageiro);
+	}
+	public void removerAluno(Mensageiro mensageiro) {
+		alunos.remove(mensageiro);
+	}
+	public void enviarMensagem(String mensagem) {
+		for (Mensageiro m : alunos) {
+			m.atualizarMensagem(mensagem);
+		}
+	}
+	
 	private class OuvinteDosBotoes implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -36,6 +59,11 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 			case "Voltar":
 				dispose();
 				new TelaDetalharEditalSemResultado(edital);
+				break;
+			case "Enviar Mensagem":
+				String mensagem = JOptionPane.showInputDialog("Digite a mensagem para os Alunos!");
+				enviarMensagem(mensagem);
+				JOptionPane.showMessageDialog(null, "Mensagem Enviada");
 				break;
 			}
 		}
@@ -77,5 +105,11 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 		btVoltar.setBounds(520, 350, 90, 30);
 		btVoltar.addActionListener(ouvinte);
 		add(btVoltar);
+		
+		JButton btMensagem = new JButton("Enviar Mensagem");
+		btMensagem.setBounds(360, 350, 140, 30);
+		btMensagem.addActionListener(ouvinte);
+		add(btMensagem);
 	}
+
 }

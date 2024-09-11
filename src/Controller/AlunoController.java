@@ -26,4 +26,8 @@ public class AlunoController {
 	public boolean loginAluno(AlunoDTO dto) {
 		return alunoModel.loginAluno(dto);
 	}
+	
+	public String recuperarMatricula(AlunoDTO aluno) {
+		return alunoModel.recuperarMatricula(aluno).getMatricula();
+	}
 }
