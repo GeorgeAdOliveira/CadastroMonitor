@@ -138,7 +138,7 @@ public class TelaListarTodosAlunos extends TelaPadraoImagem {
 		OuvinteDosBotoes ouvinte = new OuvinteDosBotoes();
 
 		JButton btListarNome = new JButton("Listar Por Nome");
-		btListarNome.setBounds(60, 350, 130, 30);
+		btListarNome.setBounds(490, 130, 130, 30);
 		btListarNome.addActionListener(ouvinte);
 		add(btListarNome);
 
