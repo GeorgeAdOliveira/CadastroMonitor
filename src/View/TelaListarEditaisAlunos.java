@@ -65,20 +65,20 @@ public class TelaListarEditaisAlunos extends TelaPadraoImagem {
 						editalControler.editarEdital(editalDto);
 						
 						// Essa tela mostra o resultado preliminar do edital
-						new TelaDetalharEditalResultado("Resultado Preliminar", "Resultado Preliminar", "aluno",
+						new TelaDetalharEditalResultado("Resultado Preliminar", "Resultado Preliminar",matricula,
 								edital);
 						dispose();
 
 					} else if (edital.getSituacaoDoEdital().equals("Resultado Final")) {
 						// Essa tela mostra o resultado final do edital
-						new TelaDetalharEditalResultado("Resultado Final", "Resultado Final", "aluno", edital);
+						new TelaDetalharEditalResultado("Resultado Final", "Resultado Final", matricula, edital);
 						dispose();
 					} else if (edital.getSituacaoDoEdital().equals("Aberto")
 							|| edital.getSituacaoDoEdital().equals("")) {
 						if (edital.situacao().equals("Aberto")) {
 							dispose();
 							// Essa tela mostra o edital em aberto
-							new TelaDetalharEditalSemResultadoAluno(edital);
+							new TelaDetalharEditalSemResultadoAluno(edital, matricula);
 						} else {
 							JOptionPane.showMessageDialog(null, "Selecione um Edital Aberto!");
 						}

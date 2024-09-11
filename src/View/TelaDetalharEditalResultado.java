@@ -38,10 +38,10 @@ public class TelaDetalharEditalResultado extends TelaPadraoImagem {
 			switch (e.getActionCommand()) {
 			case "Voltar":
 				//verificar quem é o usuario e abre a tela respectiva
-				if (usuario.equals("aluno")) {
-					//new JanelaListarEditaisAlunos();
-				} else {
+				if (usuario.equals("coordenador")) {
 					new TelaListarEditais();
+				} else {
+					new TelaListarEditaisAlunos(usuario);
 				}
 				dispose();
 				break;

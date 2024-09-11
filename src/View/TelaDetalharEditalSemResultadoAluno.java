@@ -22,10 +22,12 @@ public class TelaDetalharEditalSemResultadoAluno extends TelaPadraoImagem {
 	private static final long serialVersionUID = 1L;
 	private EditalDeMonitoriaModel edital;
 	private JTable tabela;
+	private String matricula;
 
-	public TelaDetalharEditalSemResultadoAluno(EditalDeMonitoriaModel edital) {
+	public TelaDetalharEditalSemResultadoAluno(EditalDeMonitoriaModel edital,String matricula ) {
 		super("Detalhar Edital", "Detalhar Edital");
 		this.edital = edital;
+		this.matricula = matricula;
 		adicionarLabel();
 		adicionarTabela();
 		adicionarBotoes();
@@ -39,9 +41,9 @@ public class TelaDetalharEditalSemResultadoAluno extends TelaPadraoImagem {
 			switch(e.getActionCommand()) {
 			case "Voltar":
 				dispose();
-//				new TelaListarEditaisAlunos();
-//				break;
-//			case "Inscrever":
+				new TelaListarEditaisAlunos(matricula);
+				break;
+			case "Inscrever":
 //				int linhaSelecionada = tabela.getSelectedRow();
 //				if (linhaSelecionada == -1) {
 //					JOptionPane.showMessageDialog(null, "Selecione uma Disciplina!");
