@@ -10,6 +10,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.AlunoController;
+import DTO.AlunoDTO;
 import Model.AlunoModel;
 import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
@@ -23,35 +25,49 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 	private static final long serialVersionUID = 1L;
 	private EditalDeMonitoriaModel edital;
 	private JTable tabela;
-	private ArrayList<Mensageiro> alunos;
-	
+	private ArrayList<AlunoModel> alunos = new ArrayList<>();
+
 	public TelaListarInscricao(EditalDeMonitoriaModel edital) {
 		super("Lista de Inscrição", "Lista de Inscrição");
 		this.edital = edital;
-			for(DisciplinaModel d :edital.getDisciplinas()) {
-				for(InscricaoModel i : d.getInscricoes()) {
-					adicionarAluno(i.getAluno());
+		for (DisciplinaModel d : edital.getDisciplinas()) {
+			if (d != null) {
+				for (InscricaoModel i : d.getInscricoes()) {
+					if (i != null) {
+						adicionarAluno(i.getAluno());
+					}
+
 				}
 			}
-			
-				
+
+		}
+
 		adicionarBotoes();
 		adicionarTabela();
 		setVisible(true);
 	}
-	
-	public void adicionarAluno(Mensageiro mensageiro) {
+
+	public void adicionarAluno(AlunoModel mensageiro) {
 		alunos.add(mensageiro);
 	}
+
 	public void removerAluno(Mensageiro mensageiro) {
 		alunos.remove(mensageiro);
 	}
+
 	public void enviarMensagem(String mensagem) {
 		for (Mensageiro m : alunos) {
 			m.atualizarMensagem(mensagem);
+
 		}
+		AlunoController alunoController = new AlunoController();
+		AlunoDTO alunoDTO = new AlunoDTO();
+		alunoDTO.setAlunos(alunos);
+		alunoDTO.setMensagem(mensagem);
+		
+		alunoController.atualizarMensagemBD(alunoDTO);
 	}
-	
+
 	private class OuvinteDosBotoes implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -62,8 +78,14 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 				break;
 			case "Enviar Mensagem":
 				String mensagem = JOptionPane.showInputDialog("Digite a mensagem para os Alunos!");
-				enviarMensagem(mensagem);
-				JOptionPane.showMessageDialog(null, "Mensagem Enviada");
+				if (mensagem.equals("")) {
+
+				} else {
+
+					enviarMensagem(mensagem);
+
+					JOptionPane.showMessageDialog(null, "Mensagem Enviada");
+				}
 				break;
 			}
 		}
@@ -83,7 +105,7 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 				Object[] linha = new Object[4];
 				linha[0] = i.getAluno().getNome();
 				linha[1] = i.getDisciplina().getNomeDaDisciplina();
-				linha[2] = edital.notaFinal(i.getNotaCRE(),i.getNotaDisciplina()); 
+				linha[2] = edital.notaFinal(i.getNotaCRE(), i.getNotaDisciplina());
 				linha[3] = i.getResultado();
 				modelo.addRow(linha);
 			}
@@ -105,7 +127,7 @@ public class TelaListarInscricao extends TelaPadraoImagem {
 		btVoltar.setBounds(520, 350, 90, 30);
 		btVoltar.addActionListener(ouvinte);
 		add(btVoltar);
-		
+
 		JButton btMensagem = new JButton("Enviar Mensagem");
 		btMensagem.setBounds(360, 350, 140, 30);
 		btMensagem.addActionListener(ouvinte);

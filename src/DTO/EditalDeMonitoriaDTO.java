@@ -19,6 +19,7 @@ public class EditalDeMonitoriaDTO {
 	private ArrayList<DisciplinaModel> disciplinas;
 	private boolean editalExiste;
 	private ArrayList<EditalDeMonitoriaModel> editais;
+	private EditalDeMonitoriaModel editalDeMonitoriaModel;
 
 	public EditalDeMonitoriaDTO() {
 
@@ -121,5 +122,13 @@ public class EditalDeMonitoriaDTO {
 
 	public void setEditais(ArrayList<EditalDeMonitoriaModel> editais) {
 		this.editais = editais;
+	}
+
+	public EditalDeMonitoriaModel getEditalDeMonitoriaModel() {
+		return editalDeMonitoriaModel;
+	}
+
+	public void setEditalDeMonitoriaModel(EditalDeMonitoriaModel editalDeMonitoriaModel) {
+		this.editalDeMonitoriaModel = editalDeMonitoriaModel;
 	}
 }

@@ -3,6 +3,7 @@
 import java.util.ArrayList;
 
 import Model.AlunoModel;
+import View.Mensageiro;
 
 public class AlunoDTO {
 
@@ -15,8 +16,10 @@ public class AlunoDTO {
 	private boolean alunoExiste;
 	private boolean alunoCriado;
 	private ArrayList<AlunoModel> alunos;
+	private ArrayList<Mensageiro> alunosMensagem;
 	private String mensagem;
-
+	private AlunoModel alunoModel;
+	
 	public AlunoDTO() {
 
 	}
@@ -107,6 +110,22 @@ public class AlunoDTO {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+
+	public AlunoModel getAlunoModel() {
+		return alunoModel;
+	}
+
+	public void setAlunoModel(AlunoModel alunoModel) {
+		this.alunoModel = alunoModel;
+	}
+
+	public ArrayList<Mensageiro> getAlunosMensagem() {
+		return alunosMensagem;
+	}
+
+	public void setAlunosMensagem(ArrayList<Mensageiro> alunosMensagem) {
+		this.alunosMensagem = alunosMensagem;
 	}
 
 }

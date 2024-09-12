@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import DTO.AlunoDTO;
 import DTO.CoordenadorDTO;
 import DTO.EditalDeMonitoriaDTO;
+import DTO.InscricaoDTO;
 import Model.AlunoModel;
 import Model.CoordenadorModel;
+import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
+import Model.InscricaoModel;
 
 public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, SearchEditalDeMonitoria {
 
@@ -49,6 +52,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		aluno.setAlunoExiste(false);
 		return aluno;
 	}
+
 	@Override
 	public AlunoDTO recuperarMatricula(AlunoDTO aluno) {
 		bd = Persistencia.getInstance().recuperar();
@@ -58,10 +62,22 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 				return aluno;
 			}
 		}
-		
+
 		return aluno;
 	}
-	
+
+	public AlunoDTO recuperarAlunoModelPelaMtricula(AlunoDTO aluno) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			if (a.getMatricula().equals(aluno.getMatricula())) {
+				aluno.setAlunoModel(a);
+				return aluno;
+			}
+		}
+
+		return aluno;
+	}
+
 	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno) {
 		bd = Persistencia.getInstance().recuperar();
 		for (AlunoModel a : bd.getAlunos()) {
@@ -75,7 +91,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 				return aluno;
 			}
 		}
-		
+
 		return aluno;
 	}
 
@@ -117,6 +133,24 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 	public AlunoDTO listarAlunos(AlunoDTO aluno) {
 		aluno.setAlunos(Persistencia.getInstance().recuperar().getAlunos());
 		return aluno;
+	}
+
+	public void atualizarMensagemBD(AlunoDTO alunoDTO) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			for (AlunoModel aM : alunoDTO.getAlunos()) {
+				if (aM != null) {
+					if (a.getMatricula().equals(aM.getMatricula())) {
+						a.setMensagem(alunoDTO.getMensagem());
+
+					}
+				}
+
+			}
+
+		}
+		Persistencia.getInstance().salvar(bd);
+
 	}
 
 	@Override
@@ -193,6 +227,36 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		return coordenador;
 	}
 
+	public InscricaoDTO realizarInscricaoNoEdital(InscricaoDTO dto) {
+		bd = Persistencia.getInstance().recuperar();
+		for (EditalDeMonitoriaModel ed : bd.getEditais()) {
+			if (ed.getId() == dto.getIdEdital()) {
+				for (DisciplinaModel dis : ed.getDisciplinas()) {
+					if (dis.getNomeDaDisciplina().equals(dto.getNomeDisciplina())) {
+						AlunoModel aluno = new AlunoModel();
+						for (AlunoModel a : bd.getAlunos()) {
+							if (a.getMatricula().equals(dto.getIdAluno())) {
+								aluno = a;
+							}
+						}
+
+						InscricaoModel inscricao = new InscricaoModel(aluno, dis, dto.getNotaCRE(),
+								dto.getNotaDisciplina(), dto.getResultado(), dto.getNotaFinal());
+
+						dis.getInscricoes().add(inscricao);
+						Persistencia.getInstance().salvar(bd);
+						dto.setInscricaoCriada(true);
+						return dto;
+					}
+				}
+
+			}
+
+		}
+
+		return dto;
+	}
+
 	@Override
 	public EditalDeMonitoriaDTO adicionarEdital(EditalDeMonitoriaDTO edital) {
 		bd = Persistencia.getInstance().recuperar();
@@ -236,7 +300,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 							Persistencia.getInstance().salvar(bd);
 							edital.setEditalExiste(true);
 							return edital;
-							
+
 						} else {
 							return edital;
 						}
@@ -249,7 +313,7 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 			}
 		}
 		return edital;
-		
+
 	}
 
 	@Override
@@ -270,7 +334,5 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		edital.setEditais(bd.getEditais());
 		return edital;
 	}
-
-	
 
 }

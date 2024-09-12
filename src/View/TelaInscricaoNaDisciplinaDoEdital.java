@@ -3,22 +3,16 @@ package View;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import Controller.AlunoController;
-import Controller.EditalController;
-import DAO.CentralDeInformacoesDAO;
-import DTO.AlunoDTO;
-import DTO.EditalDeMonitoriaDTO;
-import Model.AlunoModel;
+import Controller.InscricaoController;
+import DTO.InscricaoDTO;
 import Model.DisciplinaModel;
 import Model.EditalDeMonitoriaModel;
-import Model.InscricaoModel;
 
 public class TelaInscricaoNaDisciplinaDoEdital extends TelaPadraoImagem {
 
@@ -60,47 +54,17 @@ public class TelaInscricaoNaDisciplinaDoEdital extends TelaPadraoImagem {
 					if (notaCRE < 0 || notaCRE > 100 || notaDisciplina < 0 || notaDisciplina > 100) {
 						JOptionPane.showMessageDialog(null, "Notas Invalidas!");
 					} else {
-
-						ArrayList<DisciplinaModel> disciplinas = edital.getDisciplinas();
-						DisciplinaModel disciplinaf = new DisciplinaModel();
-						for (DisciplinaModel d : disciplinas) {
-							if (d.getNomeDaDisciplina().equals(disciplina.getNomeDaDisciplina())) {
-								disciplinaf = d;
-							}
-						}
 						// Realiza Inscrição
-						AlunoDTO alunoDTO = new AlunoDTO();
-						alunoDTO.setMatricula(usuario);
-						AlunoController alunoController = new AlunoController();
+						InscricaoController controller = new InscricaoController();
 
-						alunoDTO = alunoController.recuperarAlunoPelaMtricula(alunoDTO);
+						InscricaoDTO inscricaoDTO = new InscricaoDTO(usuario, edital.getId(),
+								disciplina.getNomeDaDisciplina(), notaCRE, notaDisciplina, "pendente", 0);
 
-						AlunoModel aluno = new AlunoModel();
-						aluno.setNome(alunoDTO.getNome());
-						aluno.setMatricula(alunoDTO.getMatricula());
-						aluno.setEmail(alunoDTO.getEmail());
-						aluno.setSenha(alunoDTO.getSenha());
-						aluno.setSexo(alunoDTO.getSexo());
-						aluno.setMensagem(alunoDTO.getMensagem());
-
-						InscricaoModel inscricao = new InscricaoModel(aluno, disciplinaf, notaCRE, notaDisciplina,
-								"pendente", 0);
-						disciplinaf.getInscricoes().add(inscricao);
-						edital.setDisciplinas(disciplinas);
-
-						EditalController editalController = new EditalController();
-						EditalDeMonitoriaDTO editalMonitoriaDTO = new EditalDeMonitoriaDTO();
-						editalMonitoriaDTO.setId(edital.getId());
-						editalMonitoriaDTO.setNumeroDoEdital(edital.getNumeroDoEdital());
-						editalMonitoriaDTO.setQtdDeInscricaoPorAluno(edital.getQtdDeInscricaoPorAluno());
-						editalMonitoriaDTO.setSituacaoDoEdital(edital.getSituacaoDoEdital());
-						editalMonitoriaDTO.setDataInicio(edital.getDataInicio());
-						editalMonitoriaDTO.setDataFim(edital.getDataFim());
-						editalMonitoriaDTO.setPesoCRE(edital.getPesoCRE());
-						editalMonitoriaDTO.setPesoNota(edital.getPesoNota());
-						editalMonitoriaDTO.setDisciplinas(edital.getDisciplinas());
-						editalController.editarEdital(editalMonitoriaDTO);
-						JOptionPane.showMessageDialog(null, "Inscrição Realizada com Sucesso!");
+						if (controller.realizarInscricaoNoEdital(inscricaoDTO)) {
+							JOptionPane.showMessageDialog(null, "Inscrição Realizada com Sucesso!");
+						} else {
+							JOptionPane.showMessageDialog(null, "Não foi possivel realizar a Inscrição!");
+						}
 
 						new TelaDetalharEditalSemResultadoAluno(edital, usuario);
 						dispose();

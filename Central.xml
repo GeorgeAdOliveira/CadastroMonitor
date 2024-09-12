@@ -13,6 +13,7 @@
       <centralDAO/>
       <matricula>202225020037</matricula>
       <sexo>MASCULINO</sexo>
+      <mensagem>Bom Dia Princesa!</mensagem>
     </Model.AlunoModel>
     <Model.AlunoModel>
       <nome>Gabriel Souza</nome>
@@ -58,13 +59,33 @@
           <nomeDaDisciplina>Poo</nomeDaDisciplina>
           <qtdVagasVoluntario>0</qtdVagasVoluntario>
           <qtdVagasRemunerada>2</qtdVagasRemunerada>
-          <inscricoes/>
+          <inscricoes>
+            <Model.InscricaoModel>
+              <centralDAO/>
+              <aluno reference="../../../../../../../alunos/Model.AlunoModel"/>
+              <disciplina reference="../../.."/>
+              <notaCRE>90.0</notaCRE>
+              <notaDisciplina>90.0</notaDisciplina>
+              <notaFinal>0.0</notaFinal>
+              <resultado>pendente</resultado>
+            </Model.InscricaoModel>
+          </inscricoes>
         </Model.DisciplinaModel>
         <Model.DisciplinaModel>
           <nomeDaDisciplina>MAC</nomeDaDisciplina>
           <qtdVagasVoluntario>0</qtdVagasVoluntario>
           <qtdVagasRemunerada>1</qtdVagasRemunerada>
-          <inscricoes/>
+          <inscricoes>
+            <Model.InscricaoModel>
+              <centralDAO/>
+              <aluno reference="../../../../../../../alunos/Model.AlunoModel"/>
+              <disciplina reference="../../.."/>
+              <notaCRE>85.0</notaCRE>
+              <notaDisciplina>85.0</notaDisciplina>
+              <notaFinal>0.0</notaFinal>
+              <resultado>pendente</resultado>
+            </Model.InscricaoModel>
+          </inscricoes>
         </Model.DisciplinaModel>
         <Model.DisciplinaModel>
           <nomeDaDisciplina>IC</nomeDaDisciplina>

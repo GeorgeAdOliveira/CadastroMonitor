@@ -1,7 +1,12 @@
 package Model;
 
+import DAO.CentralDeInformacoesDAO;
+import DTO.InscricaoDTO;
+
 public class InscricaoModel {
 
+	private CentralDeInformacoesDAO centralDAO = new CentralDeInformacoesDAO();
+	
 	private AlunoModel aluno;
 	private DisciplinaModel disciplina;
 	private float notaCRE;
@@ -9,6 +14,9 @@ public class InscricaoModel {
 	private float notaFinal;
 	private String resultado;
 
+	public InscricaoModel() {
+		
+	}
 	public InscricaoModel(AlunoModel aluno, DisciplinaModel disciplina, float notaCRE, float notaDisciplina,
 			String resultado, float notaFinal) {
 		this.aluno = aluno;
@@ -18,6 +26,11 @@ public class InscricaoModel {
 		this.notaFinal = notaFinal;
 		this.resultado = resultado;
 
+	}
+	
+	public boolean realizarInscricaoNoEdital(InscricaoDTO dto) {
+		dto = centralDAO.realizarInscricaoNoEdital(dto);
+		return dto.isInscricaoCriada();
 	}
 
 	public AlunoModel getAluno() {

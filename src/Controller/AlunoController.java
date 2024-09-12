@@ -34,4 +34,12 @@ public class AlunoController {
 	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno) {
 		return alunoModel.recuperarAlunoPelaMtricula(aluno);
 	}
+	public AlunoDTO recuperarAlunoModelPelaMtricula(AlunoDTO aluno) {
+		return alunoModel.recuperarAlunoModelPelaMtricula(aluno);
+	}
+
+	public void atualizarMensagemBD(AlunoDTO alunoDTO) {
+		alunoModel.atualizarMensagemBD(alunoDTO);
+		
+	}
 }
