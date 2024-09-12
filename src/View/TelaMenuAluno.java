@@ -48,7 +48,6 @@ public class TelaMenuAluno extends TelaPadraoImagem {
 			case "Ver Mensagens":
 				JOptionPane.showMessageDialog(null,alunoDto.getMensagem() );
 				//new TelaListarMrnsagens(alunoDto.getMensagem());
-				dispose();
 				break;
 			}
 		}

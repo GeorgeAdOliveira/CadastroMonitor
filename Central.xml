@@ -1,7 +1,7 @@
 <DAO.BancoDeDados>
   <coordenador>
     <nome>Cleyton Souza</nome>
-    <email>Cleyton@gmail.com</email>
+    <email>cleyton@gmail.com</email>
     <senha>1234</senha>
     <centralDAO/>
   </coordenador>
@@ -12,6 +12,14 @@
       <senha>1234</senha>
       <centralDAO/>
       <matricula>202225020037</matricula>
+      <sexo>MASCULINO</sexo>
+    </Model.AlunoModel>
+    <Model.AlunoModel>
+      <nome>Gabriel Souza</nome>
+      <email>gabriel@gmail.com</email>
+      <senha>1234</senha>
+      <centralDAO/>
+      <matricula>202422</matricula>
       <sexo>MASCULINO</sexo>
     </Model.AlunoModel>
   </alunos>
@@ -91,6 +99,25 @@
         </Model.DisciplinaModel>
         <Model.DisciplinaModel>
           <nomeDaDisciplina>MAC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1726104201460</id>
+      <numeroDoEdital>2024.22</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-11</dataInicio>
+      <dataFim>2025-11-11</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>PP</nomeDaDisciplina>
           <qtdVagasVoluntario>1</qtdVagasVoluntario>
           <qtdVagasRemunerada>1</qtdVagasRemunerada>
           <inscricoes/>

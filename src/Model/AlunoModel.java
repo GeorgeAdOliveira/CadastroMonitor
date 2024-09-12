@@ -30,11 +30,11 @@ public class AlunoModel extends PessoaModel implements Mensageiro{
 	}
 
 	public boolean modificarAluno(AlunoDTO dto) {
-		ArrayList<AlunoModel> alunos = visualizarAlunos(dto).getAlunos();
-		if (dto.getMatricula().equals(alunos.get(dto.getIndiceLista()).getMatricula())) {
+//		ArrayList<AlunoModel> alunos = visualizarAlunos(dto).getAlunos();
+//		if (dto.getMatricula().equals(alunos.get(dto.getIndiceLista()).getMatricula())) {
 			return centralDAO.editarAluno(dto).getAlunoExiste();
-		}
-		return false;
+//		}
+//		return false;
 	}
 
 	public AlunoDTO recuperarMatricula(AlunoDTO aluno) {
