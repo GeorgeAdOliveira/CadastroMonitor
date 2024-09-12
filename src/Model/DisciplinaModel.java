@@ -11,6 +11,10 @@ public class DisciplinaModel {
 	private String qtdVagasRemunerada;
 	private ArrayList<InscricaoModel> inscricoes;
 	
+	public DisciplinaModel() {
+		
+	}
+	
 	public DisciplinaModel(String nomeDaDisciplina, String qtdVagasVoluntario, String qtdVagasRemunerada) {
 		this.nomeDaDisciplina = nomeDaDisciplina;
 		this.qtdVagasVoluntario = qtdVagasVoluntario;

@@ -44,13 +44,13 @@ public class TelaDetalharEditalSemResultadoAluno extends TelaPadraoImagem {
 				new TelaListarEditaisAlunos(matricula);
 				break;
 			case "Inscrever":
-//				int linhaSelecionada = tabela.getSelectedRow();
-//				if (linhaSelecionada == -1) {
-//					JOptionPane.showMessageDialog(null, "Selecione uma Disciplina!");
-//				} else {
-//					DisciplinaModel disciplina = edital.getDisciplinas().get(linhaSelecionada);
-//
-//					//Verifica se é possivel se inscrever
+				int linhaSelecionada = tabela.getSelectedRow();
+				if (linhaSelecionada == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione uma Disciplina!");
+				} else {
+					DisciplinaModel disciplina = edital.getDisciplinas().get(linhaSelecionada);
+
+					//Verifica se é possivel se inscrever
 //					Aluno aluno = Persistencia.getInstance().recuperar().getAlunoLogado();
 //					if(edital.jaAtingiuQuantidadeInscricao(aluno)) {
 //						JOptionPane.showMessageDialog(null, "Você já atingiu a Quantidade Máxima\n"
@@ -61,8 +61,8 @@ public class TelaDetalharEditalSemResultadoAluno extends TelaPadraoImagem {
 //							JOptionPane.showMessageDialog(null, "Você já se inscreveu nesta Disciplina!");
 //						} else {
 //							//Abre a tela Para fazer a incrição
-//							//new JanelaInscricaoNaDisciplinaDoEdital( edital, disciplina );
-//							dispose();
+							new TelaInscricaoNaDisciplinaDoEdital( edital, disciplina, matricula );
+							dispose();
 //						}
 //					}	
 //				}
@@ -70,7 +70,7 @@ public class TelaDetalharEditalSemResultadoAluno extends TelaPadraoImagem {
 			}
 		}
 	}
-
+	}
 	private void adicionarTabela() {
 
 		DefaultTableModel modelo = new DefaultTableModel();
@@ -152,5 +152,5 @@ public class TelaDetalharEditalSemResultadoAluno extends TelaPadraoImagem {
 		add(lbQtdInscricao);
 
 	}
-
+	
 }
