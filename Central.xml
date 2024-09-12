@@ -145,5 +145,67 @@
         </Model.DisciplinaModel>
       </disciplinas>
     </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1726166336253</id>
+      <numeroDoEdital>2024.30</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-12</dataInicio>
+      <dataFim>2024-11-08</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>Poo</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>2</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>MAC</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>IC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>0</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1726167482571</id>
+      <numeroDoEdital>2024.77</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-08</dataInicio>
+      <dataFim>2024-11-08</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>Poo</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>2</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>IC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>0</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>MAC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
   </editais>
 </DAO.BancoDeDados>

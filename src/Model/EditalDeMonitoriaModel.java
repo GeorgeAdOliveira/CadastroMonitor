@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 import DAO.CentralDeInformacoesDAO;
 import DTO.EditalDeMonitoriaDTO;
+import View.Prototype;
 
-public class EditalDeMonitoriaModel {
+public class EditalDeMonitoriaModel implements Prototype{
 
 	private CentralDeInformacoesDAO centralDAO = new CentralDeInformacoesDAO();
 
@@ -137,6 +138,21 @@ public class EditalDeMonitoriaModel {
 
 	public void setDisciplinas(ArrayList<DisciplinaModel> disciplinas) {
 		this.disciplinas = disciplinas;
+	}
+
+	@Override
+	public EditalDeMonitoriaModel clone() {
+		EditalDeMonitoriaModel editalCopia = new EditalDeMonitoriaModel();
+		editalCopia.setNumeroDoEdital(numeroDoEdital);
+		editalCopia.setQtdDeInscricaoPorAluno(qtdDeInscricaoPorAluno);
+		editalCopia.setSituacaoDoEdital(situacaoDoEdital);
+		editalCopia.setDataInicio(dataInicio);
+		editalCopia.setDataFim(dataFim);
+		editalCopia.setPesoCRE(pesoCRE);
+		editalCopia.setPesoNota(pesoNota);
+		editalCopia.setDisciplinas(disciplinas);
+		
+		return editalCopia;
 	}
 
 }

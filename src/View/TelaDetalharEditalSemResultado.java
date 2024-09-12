@@ -62,7 +62,8 @@ public class TelaDetalharEditalSemResultado extends TelaPadraoImagem{
 				break;
 			case "Clonar":
 				//clona o edital
-				new TelaCadastrarEdital(edital, "Clonar Edital de Monitoria");
+				
+				new TelaCadastrarEdital(edital.clone(), "Clonar Edital de Monitoria");
 				dispose();
 				break;
 			//Mostra todas as inscrições do edital
