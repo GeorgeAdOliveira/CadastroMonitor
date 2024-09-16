@@ -1,7 +1,9 @@
 package View;
 
 import java.awt.Font;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class TelaPadraoImagem extends TelaPadrao {
@@ -24,19 +26,19 @@ public class TelaPadraoImagem extends TelaPadrao {
 		
 		
 		// simbolo do inicio
-//		JLabel icone1 = new JLabel("");
-//		icone1.setBounds(50, -100, 500, 300);
-//		ImageIcon imagem1 = Imagens.ICONE_PAPEL_RASGADO;
-//		Image img1 = imagem1.getImage().getScaledInstance(icone1.getWidth(), icone1.getHeight(), Image.SCALE_SMOOTH);
-//		icone1.setIcon(new ImageIcon(img1));
-//		getContentPane().add(icone1);
-//		// simbolo do livro
-//		JLabel icone2 = new JLabel("");
-//		icone2.setBounds(10, 240, 200, 200);
-//		ImageIcon imagem2 = Imagens.ICONE_LIVRO;
-//		Image img2 = imagem2.getImage().getScaledInstance(icone2.getWidth(), icone2.getHeight(), Image.SCALE_SMOOTH);
-//		icone2.setIcon(new ImageIcon(img2));
-//		getContentPane().add(icone2);
+		JLabel icone1 = new JLabel("");
+		icone1.setBounds(50, -100, 500, 300);
+		ImageIcon imagem1 = Imagens.ICONE_PAPEL_RASGADO;
+		Image img1 = imagem1.getImage().getScaledInstance(icone1.getWidth(), icone1.getHeight(), Image.SCALE_SMOOTH);
+		icone1.setIcon(new ImageIcon(img1));
+		getContentPane().add(icone1);
+		// simbolo do livro
+		JLabel icone2 = new JLabel("");
+		icone2.setBounds(10, 240, 200, 200);
+		ImageIcon imagem2 = Imagens.ICONE_LIVRO;
+		Image img2 = imagem2.getImage().getScaledInstance(icone2.getWidth(), icone2.getHeight(), Image.SCALE_SMOOTH);
+		icone2.setIcon(new ImageIcon(img2));
+		getContentPane().add(icone2);
 
 	}
 }

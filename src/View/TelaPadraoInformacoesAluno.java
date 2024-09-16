@@ -7,24 +7,19 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 import Controller.AlunoController;
 import DTO.AlunoDTO;
-import Model.AlunoModel;
 import Model.Sexo;
 
-public class TelaCadastroAluno extends TelaPadraoImagem {
+public class TelaPadraoInformacoesAluno extends TelaPadraoImagem {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNome;
@@ -33,24 +28,21 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 	private JPasswordField pfSenha;
 	private JPasswordField pfConfirmarSenha;
 	private JComboBox<Sexo> cbSexo;
-	private JButton btCadastrar;
+	private JButton btSalvar;
 
-
-	public TelaCadastroAluno() {
-		super("Cadastrar Aluno","Cadastrar Aluno");
+	public TelaPadraoInformacoesAluno(String titulo, String tituloPadrao) {
+		super(titulo, tituloPadrao);
 		adicionarLabel();
 		adicionarBotoes();
-		adicionarCombo(null);
-		adicionarTextFields();
-		setVisible(true);
 
 	}
 
-	private class OuvinteDosBotoes implements ActionListener {
-		public void actionPerformed(ActionEvent cliqueCadastrar) {
+	private class OuvinteDoBotaoSalvar implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
 			AlunoDTO alunoDto;
 			AlunoController controler = new AlunoController();
-			switch (cliqueCadastrar.getActionCommand()) {
+			switch (e.getActionCommand()) {
 			case "Voltar":
 				new TelaLogin();
 				dispose();
@@ -61,6 +53,7 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 					String senha = new String(pfSenha.getPassword());
 					String confirmarSenha = new String(pfConfirmarSenha.getPassword());
 					
+					// criando Aluno
 					if (senha.equals(confirmarSenha)) {
 						alunoDto = new AlunoDTO(tfNome.getText(), tfMatricula.getText(), email,
 								cbSexo.getSelectedItem().toString(), senha);
@@ -76,18 +69,18 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 						JOptionPane.showMessageDialog(null, "Senhas divergentes!");
 					}
 					
-
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
+					new TelaLogin();
+					dispose();// fechar a janela
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null, erro.getMessage());
 
 				}
 				break;
-
 			}
 		}
 	}
 
-// So permite ser digitado letra
+	// So permite ser digitado letra
 	public class OuvinteDeTecladoDoCampoNome implements KeyListener {
 		public void keyTyped(KeyEvent e) {
 			char letra = e.getKeyChar();
@@ -102,7 +95,7 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 		}
 	}
 
-// So perminte ser digitado numero
+	// So perminte ser digitado numero
 	public class OuvinteDeTecladoDoCampoMatricula implements KeyListener {
 		public void keyTyped(KeyEvent e) {
 			char letra = e.getKeyChar();
@@ -117,15 +110,15 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 		}
 	}
 
-// Ouvinte para verificar se os campos estão vazios
+	// Ouvinte para verificar se os campos estão vazios
 	public class OuvinteDosCampos implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
 			if (!tfNome.getText().equals("") && !tfMatricula.getText().equals("") && !tfEmail.getText().equals("")
 					&& !new String(pfSenha.getPassword()).equals("")) {
-				btCadastrar.setEnabled(true);
+				btSalvar.setEnabled(true);
 			} else {
-				btCadastrar.setEnabled(false);
+				btSalvar.setEnabled(false);
 			}
 		}
 
@@ -133,23 +126,24 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 		public void focusLost(FocusEvent e) {
 			if (!tfNome.getText().equals("") && !tfMatricula.getText().equals("") && !tfEmail.getText().equals("")
 					&& !new String(pfSenha.getPassword()).equals("")) {
-				btCadastrar.setEnabled(true);
+				btSalvar.setEnabled(true);
 			} else {
-				btCadastrar.setEnabled(false);
+				btSalvar.setEnabled(false);
 			}
 		}
 
 	}
 
 	public void adicionarBotoes() {
-		// ouvinte interno
-		OuvinteDosBotoes ouvinte = new OuvinteDosBotoes();
-		btCadastrar = new JButton("Cadastrar");
-		btCadastrar.setBounds(300, 350, 100, 30);
-		btCadastrar.addActionListener(ouvinte);
-		btCadastrar.setEnabled(false);
-		add(btCadastrar);
 		
+		// ouvinte interno
+		OuvinteDoBotaoSalvar ouvinte = new OuvinteDoBotaoSalvar();
+		btSalvar = new JButton("Cadastrar");
+		btSalvar.setBounds(300, 350, 100, 30);
+		btSalvar.addActionListener(ouvinte);
+		btSalvar.setEnabled(false);
+		add(btSalvar);
+
 		JButton btVoltar = new JButton("Voltar");
 		btVoltar.setBounds(420, 350, 100, 30);
 		btVoltar.addActionListener(ouvinte);
@@ -168,8 +162,6 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 		add(cbSexo);
 
 	}
-
-
 
 	public void adicionarLabel() {
 		Font font = new Font("Georgia", Font.ITALIC, 15);
@@ -205,34 +197,34 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 		add(lbConfirmarSenha);
 	}
 
-	public void adicionarTextFields() {
+	public void adicionarTextFields(String nome, String matricula, String email, String senha) {
 		OuvinteDosCampos ouvinte = new OuvinteDosCampos();
 
-		tfNome = new JTextField();
+		tfNome = new JTextField(nome);
 		OuvinteDeTecladoDoCampoNome ouvinteNome = new OuvinteDeTecladoDoCampoNome();
 		tfNome.setBounds(220, 120, 270, 25);
 		tfNome.addFocusListener(ouvinte);
 		tfNome.addKeyListener(ouvinteNome);
 		add(tfNome);
 
-		tfMatricula = new JTextField();
+		tfMatricula = new JTextField(matricula);
 		OuvinteDeTecladoDoCampoMatricula ouvinteMatricula = new OuvinteDeTecladoDoCampoMatricula();
 		tfMatricula.setBounds(235, 160, 140, 25);
 		tfMatricula.addFocusListener(ouvinte);
 		tfMatricula.addKeyListener(ouvinteMatricula);
 		add(tfMatricula);
 
-		tfEmail = new JTextField();
+		tfEmail = new JTextField(email);
 		tfEmail.setBounds(220, 200, 270, 25);
 		tfEmail.addFocusListener(ouvinte);
 		add(tfEmail);
 
-		pfSenha = new JPasswordField();
+		pfSenha = new JPasswordField(senha);
 		pfSenha.setBounds(220, 295, 140, 25);
 		pfSenha.addFocusListener(ouvinte);
 		add(pfSenha);
 
-		pfConfirmarSenha = new JPasswordField();
+		pfConfirmarSenha = new JPasswordField(senha);
 		pfConfirmarSenha.setBounds(380, 295, 140, 25);
 		add(pfConfirmarSenha);
 
@@ -287,14 +279,10 @@ public class TelaCadastroAluno extends TelaPadraoImagem {
 	}
 
 	public JButton getBtSalvar() {
-		return btCadastrar;
+		return btSalvar;
 	}
 
 	public void setBtSalvar(JButton btSalvar) {
-		this.btCadastrar = btSalvar;
+		this.btSalvar = btSalvar;
 	}
-	public static void main(String[] args) {
-		new TelaCadastroAluno();
-	}
-
 }

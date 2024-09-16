@@ -11,5 +11,7 @@ public interface SearchEditalDeMonitoria {
 	public EditalDeMonitoriaDTO verEdital (EditalDeMonitoriaDTO edital);
 	
 	public EditalDeMonitoriaDTO excluirEdital (EditalDeMonitoriaDTO edital);
+	
+	public EditalDeMonitoriaDTO recuperarEditais (EditalDeMonitoriaDTO edital);
 
 }

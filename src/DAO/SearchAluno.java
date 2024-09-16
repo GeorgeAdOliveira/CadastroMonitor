@@ -15,5 +15,8 @@ public interface SearchAluno {
 	public AlunoDTO listarAlunos(AlunoDTO aluno);
 	
 	public AlunoDTO loginAluno(AlunoDTO aluno);
+	
+	public AlunoDTO recuperarMatricula(AlunoDTO aluno);
 
+	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno);
 }

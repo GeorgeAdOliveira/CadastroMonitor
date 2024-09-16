@@ -1,10 +1,14 @@
 package DAO;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import DTO.AlunoDTO;
 import DTO.CoordenadorDTO;
 import DTO.EditalDeMonitoriaDTO;
 import Model.AlunoModel;
 import Model.CoordenadorModel;
+import Model.EditalDeMonitoriaModel;
 
 public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, SearchEditalDeMonitoria {
 
@@ -43,6 +47,35 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 			}
 		}
 		aluno.setAlunoExiste(false);
+		return aluno;
+	}
+	@Override
+	public AlunoDTO recuperarMatricula(AlunoDTO aluno) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			if (a.getEmail().equals(aluno.getEmail())) {
+				aluno.setMatricula(a.getMatricula());
+				return aluno;
+			}
+		}
+		
+		return aluno;
+	}
+	
+	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno) {
+		bd = Persistencia.getInstance().recuperar();
+		for (AlunoModel a : bd.getAlunos()) {
+			if (a.getMatricula().equals(aluno.getMatricula())) {
+				aluno.setNome(a.getNome());
+				aluno.setMatricula(a.getMatricula());
+				aluno.setEmail(a.getEmail());
+				aluno.setSenha(a.getSenha());
+				aluno.setSexo(a.getSexo());
+				aluno.setMensagem(a.getMensagem());
+				return aluno;
+			}
+		}
+		
 		return aluno;
 	}
 
@@ -162,14 +195,61 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 
 	@Override
 	public EditalDeMonitoriaDTO adicionarEdital(EditalDeMonitoriaDTO edital) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		ArrayList<EditalDeMonitoriaModel> editais = bd.getEditais();
+		for (EditalDeMonitoriaModel ed : editais) {
+			if (ed.getId() == edital.getId()) {
+				return edital;
+			}
+			if (ed.getNumeroDoEdital().equals(edital.getNumeroDoEdital())) {
+				return edital;
+			}
+		}
+		EditalDeMonitoriaModel editalModel = new EditalDeMonitoriaModel(edital.getNumeroDoEdital(),
+				edital.getQtdDeInscricaoPorAluno(), edital.getDataInicio(), edital.getDataFim(), edital.getPesoCRE(),
+				edital.getPesoNota(), edital.getDisciplinas());
+		bd.getEditais().add(editalModel);
+		Persistencia.getInstance().salvar(bd);
+		edital.setEditalExiste(true);
+		return edital;
 	}
 
 	@Override
 	public EditalDeMonitoriaDTO editarEdital(EditalDeMonitoriaDTO edital) {
-		// TODO Auto-generated method stub
-		return null;
+		bd = Persistencia.getInstance().recuperar();
+		ArrayList<EditalDeMonitoriaModel> editais = bd.getEditais();
+		LocalDate data = LocalDate.now();
+		for (EditalDeMonitoriaModel ed : editais) {
+			if (ed.getId() == edital.getId()) {
+				if (edital.getDataInicio().isAfter(data) || edital.getDataInicio().isEqual(data)) {
+					if (edital.getDataFim().isAfter(data) || edital.getDataFim().isEqual(data)) {
+						if (Integer.parseInt(ed.getQtdDeInscricaoPorAluno()) <= Integer
+								.parseInt(edital.getQtdDeInscricaoPorAluno())) {
+							ed.setNumeroDoEdital(edital.getNumeroDoEdital());
+							ed.setQtdDeInscricaoPorAluno(edital.getQtdDeInscricaoPorAluno());
+							ed.setSituacaoDoEdital(edital.getSituacaoDoEdital());
+							ed.setDataInicio(edital.getDataInicio());
+							ed.setDataFim(edital.getDataFim());
+							ed.setPesoCRE(edital.getPesoCRE());
+							ed.setPesoNota(edital.getPesoNota());
+							ed.setDisciplinas(edital.getDisciplinas());
+							Persistencia.getInstance().salvar(bd);
+							edital.setEditalExiste(true);
+							return edital;
+							
+						} else {
+							return edital;
+						}
+					} else {
+						return edital;
+					}
+				} else {
+					return edital;
+				}
+			}
+		}
+		return edital;
+		
 	}
 
 	@Override
@@ -183,5 +263,14 @@ public class CentralDeInformacoesDAO implements SearchAluno, SearchCoordenador, 
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public EditalDeMonitoriaDTO recuperarEditais(EditalDeMonitoriaDTO edital) {
+		bd = Persistencia.getInstance().recuperar();
+		edital.setEditais(bd.getEditais());
+		return edital;
+	}
+
+	
 
 }

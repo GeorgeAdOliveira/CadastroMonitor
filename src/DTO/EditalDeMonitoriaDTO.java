@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Model.DisciplinaModel;
+import Model.EditalDeMonitoriaModel;
 
 public class EditalDeMonitoriaDTO {
 
@@ -16,6 +17,8 @@ public class EditalDeMonitoriaDTO {
 	private float pesoCRE;
 	private float pesoNota;
 	private ArrayList<DisciplinaModel> disciplinas;
+	private boolean editalExiste;
+	private ArrayList<EditalDeMonitoriaModel> editais;
 
 	public EditalDeMonitoriaDTO() {
 
@@ -104,5 +107,19 @@ public class EditalDeMonitoriaDTO {
 	public void setDisciplinas(ArrayList<DisciplinaModel> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
+	public boolean editalExiste() {
+		return editalExiste;
+	}
 
+	public void setEditalExiste(boolean editalExiste) {
+		this.editalExiste = editalExiste;
+	}
+
+	public ArrayList<EditalDeMonitoriaModel> getEditais() {
+		return editais;
+	}
+
+	public void setEditais(ArrayList<EditalDeMonitoriaModel> editais) {
+		this.editais = editais;
+	}
 }

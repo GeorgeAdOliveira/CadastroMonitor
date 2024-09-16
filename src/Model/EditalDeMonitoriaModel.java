@@ -3,8 +3,13 @@ package Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import DAO.CentralDeInformacoesDAO;
+import DTO.EditalDeMonitoriaDTO;
+
 public class EditalDeMonitoriaModel {
-	
+
+	private CentralDeInformacoesDAO centralDAO = new CentralDeInformacoesDAO();
+
 	private long id = System.currentTimeMillis();
 	private String numeroDoEdital;
 	private String qtdDeInscricaoPorAluno;
@@ -14,8 +19,12 @@ public class EditalDeMonitoriaModel {
 	private float pesoCRE;
 	private float pesoNota;
 	private ArrayList<DisciplinaModel> disciplinas;
-	
-	public EditalDeMonitoriaModel (String numeroDoEdital, String qtdDeInscricaoPorAluno, LocalDate dataInicio,
+
+	public EditalDeMonitoriaModel() {
+
+	}
+
+	public EditalDeMonitoriaModel(String numeroDoEdital, String qtdDeInscricaoPorAluno, LocalDate dataInicio,
 			LocalDate dataFim, float pesoCRE, float pesoNota, ArrayList<DisciplinaModel> disciplinas) {
 		this.numeroDoEdital = numeroDoEdital;
 		this.dataInicio = dataInicio;
@@ -27,9 +36,37 @@ public class EditalDeMonitoriaModel {
 		this.situacaoDoEdital = "";
 	}
 
-	
-	
-	
+	public boolean adicionarEdital(EditalDeMonitoriaDTO dto) {
+		return centralDAO.adicionarEdital(dto).editalExiste();
+	}
+
+	public EditalDeMonitoriaDTO recuperarEditais(EditalDeMonitoriaDTO dto) {
+		return centralDAO.recuperarEditais(dto);
+	}
+	public boolean editarEdital(EditalDeMonitoriaDTO dto) {
+		return centralDAO.editarEdital(dto).editalExiste();
+	}
+
+	// Verificando se o edital esta aberto ou fechado
+	public String situacao() {
+		LocalDate data = LocalDate.now();
+		if (dataInicio.isAfter(data)) {
+			return "Fechado";
+		}
+		if ((dataInicio.isBefore(data)) && dataFim.isAfter(data)
+				|| (dataInicio.isEqual(data) || dataFim.isEqual(data))) {
+			return "Aberto";
+		}
+		return "Encerrado";
+	}
+
+	// Calucular a media da nota do aluno
+	public float notaFinal(float notaCRE, float nota) {
+		float notaFinal = notaCRE * pesoCRE + nota * pesoNota;
+		return notaFinal;
+
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -101,6 +138,5 @@ public class EditalDeMonitoriaModel {
 	public void setDisciplinas(ArrayList<DisciplinaModel> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
-	
 
 }
