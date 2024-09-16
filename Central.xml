@@ -1,7 +1,7 @@
 <DAO.BancoDeDados>
   <coordenador>
     <nome>Cleyton Souza</nome>
-    <email>Cleyton@gmail.com</email>
+    <email>cleyton@gmail.com</email>
     <senha>1234</senha>
     <centralDAO/>
   </coordenador>
@@ -12,6 +12,15 @@
       <senha>1234</senha>
       <centralDAO/>
       <matricula>202225020037</matricula>
+      <sexo>MASCULINO</sexo>
+      <mensagem>Bom Dia Princesa!</mensagem>
+    </Model.AlunoModel>
+    <Model.AlunoModel>
+      <nome>Gabriel Souza</nome>
+      <email>gabriel@gmail.com</email>
+      <senha>1234</senha>
+      <centralDAO/>
+      <matricula>202422</matricula>
       <sexo>MASCULINO</sexo>
     </Model.AlunoModel>
   </alunos>
@@ -50,6 +59,107 @@
           <nomeDaDisciplina>Poo</nomeDaDisciplina>
           <qtdVagasVoluntario>0</qtdVagasVoluntario>
           <qtdVagasRemunerada>2</qtdVagasRemunerada>
+          <inscricoes>
+            <Model.InscricaoModel>
+              <centralDAO/>
+              <aluno reference="../../../../../../../alunos/Model.AlunoModel"/>
+              <disciplina reference="../../.."/>
+              <notaCRE>90.0</notaCRE>
+              <notaDisciplina>90.0</notaDisciplina>
+              <notaFinal>0.0</notaFinal>
+              <resultado>pendente</resultado>
+            </Model.InscricaoModel>
+          </inscricoes>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>MAC</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <inscricoes>
+            <Model.InscricaoModel>
+              <centralDAO/>
+              <aluno reference="../../../../../../../alunos/Model.AlunoModel"/>
+              <disciplina reference="../../.."/>
+              <notaCRE>85.0</notaCRE>
+              <notaDisciplina>85.0</notaDisciplina>
+              <notaFinal>0.0</notaFinal>
+              <resultado>pendente</resultado>
+            </Model.InscricaoModel>
+          </inscricoes>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>IC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>0</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1725995413784</id>
+      <numeroDoEdital>2024.7</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-08</dataInicio>
+      <dataFim>2024-11-08</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>Poo</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>2</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>IC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>0</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>MAC</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1726104201460</id>
+      <numeroDoEdital>2024.22</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-11</dataInicio>
+      <dataFim>2025-11-11</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>PP</nomeDaDisciplina>
+          <qtdVagasVoluntario>1</qtdVagasVoluntario>
+          <qtdVagasRemunerada>1</qtdVagasRemunerada>
+          <inscricoes/>
+        </Model.DisciplinaModel>
+      </disciplinas>
+    </Model.EditalDeMonitoriaModel>
+    <Model.EditalDeMonitoriaModel>
+      <centralDAO/>
+      <id>1726166336253</id>
+      <numeroDoEdital>2024.30</numeroDoEdital>
+      <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
+      <situacaoDoEdital></situacaoDoEdital>
+      <dataInicio>2024-09-12</dataInicio>
+      <dataFim>2024-11-08</dataFim>
+      <pesoCRE>0.5</pesoCRE>
+      <pesoNota>0.5</pesoNota>
+      <disciplinas>
+        <Model.DisciplinaModel>
+          <nomeDaDisciplina>Poo</nomeDaDisciplina>
+          <qtdVagasVoluntario>0</qtdVagasVoluntario>
+          <qtdVagasRemunerada>2</qtdVagasRemunerada>
           <inscricoes/>
         </Model.DisciplinaModel>
         <Model.DisciplinaModel>
@@ -68,8 +178,8 @@
     </Model.EditalDeMonitoriaModel>
     <Model.EditalDeMonitoriaModel>
       <centralDAO/>
-      <id>1725995413784</id>
-      <numeroDoEdital>2024.7</numeroDoEdital>
+      <id>1726167482571</id>
+      <numeroDoEdital>2024.77</numeroDoEdital>
       <qtdDeInscricaoPorAluno>1</qtdDeInscricaoPorAluno>
       <situacaoDoEdital></situacaoDoEdital>
       <dataInicio>2024-09-08</dataInicio>
