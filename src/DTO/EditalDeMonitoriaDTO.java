@@ -1,22 +1,23 @@
-package DTO;
+package src.DTO;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
-import Model.DisciplinaModel;
-import Model.EditalDeMonitoriaModel;
+import src.Model.DisciplinaModel;
+import src.Model.EditalDeMonitoriaModel;
 
 public class EditalDeMonitoriaDTO {
-
-	private long id = System.currentTimeMillis();
-	private String numeroDoEdital;
-	private String qtdDeInscricaoPorAluno;
+    private int id;
+	private int numeroDoEdital;
+    private int qtdDeInscricaoPorAluno;
 	private String situacaoDoEdital;
-	private LocalDate dataInicio;
-	private LocalDate dataFim;
+	private Date dataInicio;
+	private Date dataFim;
 	private float pesoCRE;
 	private float pesoNota;
-	private ArrayList<DisciplinaModel> disciplinas;
+	private List<Integer> disciplinas;
 	private boolean editalExiste;
 	private ArrayList<EditalDeMonitoriaModel> editais;
 
@@ -24,8 +25,8 @@ public class EditalDeMonitoriaDTO {
 
 	}
 
-	public EditalDeMonitoriaDTO(String numeroDoEdital, String qtdDeInscricaoPorAluno, LocalDate dataInicio,
-			LocalDate dataFim, float pesoCRE, float pesoNota, ArrayList<DisciplinaModel> disciplinas) {
+	public EditalDeMonitoriaDTO(int numeroDoEdital, int qtdDeInscricaoPorAluno, Date dataInicio,
+			Date dataFim, float pesoCRE, float pesoNota, List<Integer> disciplinas) {
 		this.numeroDoEdital = numeroDoEdital;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
@@ -40,23 +41,23 @@ public class EditalDeMonitoriaDTO {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getNumeroDoEdital() {
+	public int getNumeroDoEdital() {
 		return numeroDoEdital;
 	}
 
-	public void setNumeroDoEdital(String numeroDoEdital) {
-		this.numeroDoEdital = numeroDoEdital;
+	public void setNumeroDoEdital(int i) {
+		this.numeroDoEdital = i;
 	}
 
-	public String getQtdDeInscricaoPorAluno() {
+	public int getQtdDeInscricaoPorAluno() {
 		return qtdDeInscricaoPorAluno;
 	}
 
-	public void setQtdDeInscricaoPorAluno(String qtdDeInscricaoPorAluno) {
+	public void setQtdDeInscricaoPorAluno(int qtdDeInscricaoPorAluno) {
 		this.qtdDeInscricaoPorAluno = qtdDeInscricaoPorAluno;
 	}
 
@@ -68,19 +69,19 @@ public class EditalDeMonitoriaDTO {
 		this.situacaoDoEdital = situacaoDoEdital;
 	}
 
-	public LocalDate getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDate dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public LocalDate getDataFim() {
+	public Date getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(LocalDate dataFim) {
+	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
 
@@ -100,11 +101,11 @@ public class EditalDeMonitoriaDTO {
 		this.pesoNota = pesoNota;
 	}
 
-	public ArrayList<DisciplinaModel> getDisciplinas() {
-		return disciplinas;
+	public ArrayList<Integer> getDisciplinas() {
+		return (ArrayList<Integer>) disciplinas;
 	}
 
-	public void setDisciplinas(ArrayList<DisciplinaModel> disciplinas) {
+	public void setDisciplinas(ArrayList<Integer> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 	public boolean editalExiste() {
@@ -122,4 +123,10 @@ public class EditalDeMonitoriaDTO {
 	public void setEditais(ArrayList<EditalDeMonitoriaModel> editais) {
 		this.editais = editais;
 	}
+
+	public String getCodigo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

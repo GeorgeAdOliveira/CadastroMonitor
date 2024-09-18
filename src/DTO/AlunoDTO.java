@@ -1,11 +1,12 @@
- package DTO;
+ package src.DTO;
 
 import java.util.ArrayList;
 
-import Model.AlunoModel;
+import src.Model.AlunoModel;
 
 public class AlunoDTO {
 
+	private int id;
 	private String nome;
 	private String matricula;
 	private String email;
@@ -108,5 +109,15 @@ public class AlunoDTO {
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+		
+	}
+	public int getId() {
+		return id;
+	}
+
+	
 
 }
