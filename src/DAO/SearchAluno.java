@@ -1,22 +1,23 @@
-package DAO;
+package src.DAO;
 
-import DTO.AlunoDTO;
+import java.util.List;
+
+import src.DTO.*;
 
 public interface SearchAluno {
 	
+	// Create
 	public AlunoDTO adicionarAluno(AlunoDTO aluno);
 	
+	// Delete
 	public AlunoDTO excluirAluno(AlunoDTO aluno);
 	
-	public AlunoDTO alunoExiste(AlunoDTO aluno);
-	
+	// Update
 	public AlunoDTO editarAluno(AlunoDTO aluno);
 	
-	public AlunoDTO listarAlunos(AlunoDTO aluno);
+	// Read Find All - Listar todos
+	public List<AlunoDTO> listarAlunos(AlunoDTO aluno);
 	
-	public AlunoDTO loginAluno(AlunoDTO aluno);
-	
-	public AlunoDTO recuperarMatricula(AlunoDTO aluno);
-
-	public AlunoDTO recuperarAlunoPelaMtricula(AlunoDTO aluno);
+	//findById
+	public AlunoDTO recuperarPorMatricula(AlunoDTO aluno);
 }

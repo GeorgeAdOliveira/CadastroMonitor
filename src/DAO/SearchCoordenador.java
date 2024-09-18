@@ -8,10 +8,8 @@ public interface SearchCoordenador {
 
 	public CoordenadorDTO editarCoordenador (CoordenadorDTO coordenador);
 	
-	public CoordenadorDTO coordenadorExiste (CoordenadorDTO coordenador);
-	
 	public CoordenadorDTO verCoordenador (CoordenadorDTO coordenador);
 	
-	public CoordenadorDTO loginCoordenador (CoordenadorDTO coordenador);
+	public CoordenadorDTO excluirCoordenador (CoordenadorDTO coordenador);
 	
 }

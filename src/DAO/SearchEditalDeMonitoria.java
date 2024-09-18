@@ -1,6 +1,8 @@
-package DAO;
+package src.DAO;
 
-import DTO.EditalDeMonitoriaDTO;
+import java.util.List;
+
+import src.DTO.EditalDeMonitoriaDTO;
 
 public interface SearchEditalDeMonitoria {
 	
@@ -12,6 +14,6 @@ public interface SearchEditalDeMonitoria {
 	
 	public EditalDeMonitoriaDTO excluirEdital (EditalDeMonitoriaDTO edital);
 	
-	public EditalDeMonitoriaDTO recuperarEditais (EditalDeMonitoriaDTO edital);
+	public List<EditalDeMonitoriaDTO> recuperarEditais (EditalDeMonitoriaDTO edital);
 
 }
